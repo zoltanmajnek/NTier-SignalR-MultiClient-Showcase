@@ -53,6 +53,20 @@ namespace CABTEX_HFT_2023241.Repository
                 new Friend("Árpi#+36-178#Dobó u. 12"),
                 new Friend("Fecó#+36-333#Fő u. 51"),
             });
+            
+            modelBuilder.Entity<MyDisk>().HasData(new MyDisk[]
+            {
+                new MyDisk("1#Mindenféle"),
+                new MyDisk("2#LastNinja"),
+                new MyDisk("3#Demos"),
+                new MyDisk("4#MoreDemos"),
+                new MyDisk("5#ManiacMansion"),
+                new MyDisk("6#ZacMcCrackenD1"),
+                new MyDisk("7#ZacD2"),
+                new MyDisk("8#Montys"),
+                new MyDisk("9#Others"),
+                new MyDisk("10#Utilities"),
+            });
 
         }
     }
