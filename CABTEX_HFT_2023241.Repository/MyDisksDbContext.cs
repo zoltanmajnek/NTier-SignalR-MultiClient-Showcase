@@ -40,6 +40,20 @@ namespace CABTEX_HFT_2023241.Repository
                 new DiskType("DS/HD#TDK+#1440"),
                 new DiskType("DS/DD#Philips+#880"),
             });
+
+            modelBuilder.Entity<Friend>().HasData(new Friend[]
+            {
+                new Friend("Én#0#Itthon"),
+                new Friend("Karcsi#+36-555#Hársfa u. 2"),
+                new Friend("Gyuri#+36-123#Fő u. 3"),
+                new Friend("Béla#+06-155#Szab u. 1"),
+                new Friend("Timi#+36-121#Szab u. 13"),
+                new Friend("Niki#+36-557#Hársfa u. 2"),
+                new Friend("Juli#+36-623#Fő u. 5"),
+                new Friend("Árpi#+36-178#Dobó u. 12"),
+                new Friend("Fecó#+36-333#Fő u. 51"),
+            });
+
         }
     }
 }
