@@ -53,7 +53,7 @@ namespace CABTEX_HFT_2023241.Repository
                 new Friend("Árpi#+36-178#Dobó u. 12"),
                 new Friend("Fecó#+36-333#Fő u. 51"),
             });
-            
+
             modelBuilder.Entity<MyDisk>().HasData(new MyDisk[]
             {
                 new MyDisk("1#Mindenféle"),
@@ -67,13 +67,13 @@ namespace CABTEX_HFT_2023241.Repository
                 new MyDisk("9#Others"),
                 new MyDisk("10#Utilities"),
             });
-            
+
             modelBuilder.Entity<Software>().HasData(new Software[]
             {
                 new Software("1#Maniac Mansion#LucasFilm Games#Adventure#1200"),
                 new Software("2#Zac McCracken#LucasFilm Games#Adventure#2500"),
-                new Software("3#Bard's Tale III#Interplay#RPG#150"),
-                new Software("4#Monty on the Run#Gremlin Graphics#Arcade#150"),                
+                new Software("3#Bard's Tale III#Interplay#RPG#550"),
+                new Software("4#Monty on the Run#Gremlin Graphics#Arcade#150"),
                 new Software("5#Auf widersehen Monty#Gremlin Graphics#Arcade#200"),
                 new Software("6#Last Ninja#System 3#Arcade#900"),
                 new Software("7#Disk Manager#Unknown#Utility#800"),
@@ -82,8 +82,24 @@ namespace CABTEX_HFT_2023241.Repository
                 new Software("10#Elite#David Braben#Simulation#300"),
             });
 
-
-
+            modelBuilder.Entity<DiskDirectory>().HasData(new DiskDirectory[]
+            {
+                new DiskDirectory("1#4"),
+                new DiskDirectory("1#10"),
+                new DiskDirectory("1#8"),
+                new DiskDirectory("2#6"),
+                new DiskDirectory("3#9"),
+                new DiskDirectory("4#8"),
+                new DiskDirectory("5#1"),
+                new DiskDirectory("6#2"),
+                new DiskDirectory("7#2"),
+                new DiskDirectory("8#4"),
+                new DiskDirectory("8#5"),
+                new DiskDirectory("9#3"),
+                new DiskDirectory("9#3"),
+                new DiskDirectory("10#7"),
+                new DiskDirectory("10#8"),
+            });
         }
     }
 }

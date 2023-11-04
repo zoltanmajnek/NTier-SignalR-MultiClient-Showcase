@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,6 +21,8 @@ namespace CABTEX_HFT_2023241.Models
 
         [ForeignKey(nameof(DiskType))]
         public string TypeId { get; set; }
+
+        public virtual ICollection<DiskDirectory> DiskDirectories { get; set; }
 
         public MyDisk() { }
 

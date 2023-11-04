@@ -32,7 +32,7 @@ namespace CABTEX_HFT_2023241.Models
 
             string[] split = line.Split('#');
             DiskId = int.Parse(split[0]);
-            SoftwareId = int.Parse(split[0]);
+            SoftwareId = int.Parse(split[1]);
         }
     }
 }
