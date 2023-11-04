@@ -38,7 +38,7 @@ namespace CABTEX_HFT_2023241.Repository
             {
                 new DiskType("DS/DD#TDK#780"),
                 new DiskType("DS/HD#TDK+#1440"),
-                new DiskType("DS/DD#Philips+#880"),
+                new DiskType("DS/DD#Philips#880"),
             });
 
             modelBuilder.Entity<Friend>().HasData(new Friend[]
@@ -70,17 +70,20 @@ namespace CABTEX_HFT_2023241.Repository
             
             modelBuilder.Entity<Software>().HasData(new Software[]
             {
-                new Software("Maniac Mansion#LucasFilm Games#Adventure#1200"),
-                new Software("Zac McCracken#LucasFilm Games#Adventure#2500"),
-                new Software("Bard's Tale III#Interplay#RPG#150"),
-                new Software("Monty on the Run#Gremlin Graphics#Arcade#150"),                
-                new Software("Auf widersehen Monty#Gremlin Graphics#Arcade#200"),
-                new Software("Last Ninja#System 3#Arcade#900"),
-                new Software("Disk Manager#Unknown#Utility#800"),
-                new Software("HexMon#Admin#Utility#50"),
-                new Software("Intro Maker#Maniacs of Noise#Demo#500"),
-                new Software("Elite#David Braben#Simulation#300"),
+                new Software("1#Maniac Mansion#LucasFilm Games#Adventure#1200"),
+                new Software("2#Zac McCracken#LucasFilm Games#Adventure#2500"),
+                new Software("3#Bard's Tale III#Interplay#RPG#150"),
+                new Software("4#Monty on the Run#Gremlin Graphics#Arcade#150"),                
+                new Software("5#Auf widersehen Monty#Gremlin Graphics#Arcade#200"),
+                new Software("6#Last Ninja#System 3#Arcade#900"),
+                new Software("7#Disk Manager#Unknown#Utility#800"),
+                new Software("8#HexMon#Admin#Utility#50"),
+                new Software("9#Intro Maker#Maniacs of Noise#Demo#500"),
+                new Software("10#Elite#David Braben#Simulation#300"),
             });
+
+
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,27 +10,25 @@ namespace CABTEX_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public string Creator { get; set; }
         public string Genre { get; set; }
         public int Size { get; set; }
 
-        public Software()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+        public virtual ICollection<DiskDirectory> DiskDirectories { get; set; }
+
+        public Software() { }
 
         public Software(string line)
         {
-            Id = Guid.NewGuid().ToString();
-
             string[] split = line.Split('#');
-            Name = split[0];
-            Creator = split[1];
-            Genre = split[2];
-            Size = int.Parse(split[3]);
+            Id = int.Parse(split[0]);
+            Name = split[1];
+            Creator = split[2];
+            Genre = split[3];
+            Size = int.Parse(split[4]);
         }
     }
 }
