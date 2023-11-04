@@ -8,6 +8,7 @@ namespace CABTEX_HFT_2023241.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public string Id { get; set; }
 
         public string Name { get; set; }

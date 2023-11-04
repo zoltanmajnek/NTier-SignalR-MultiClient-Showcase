@@ -8,7 +8,7 @@ namespace CABTEX_HFT_2023241.Repository
         public DbSet<DiskType> DiskTypes { get; set; }
         public DbSet<Friend> Friends { get; set; }
         public DbSet<MyDisk> MyDisks { get; set; }
-        public DbSet<DiskContainsSoftware> DiskDir { get; set; }
+        public DbSet<DiskDirectory> DiskDir { get; set; }
 
         public MyDisksDbContext()
         {

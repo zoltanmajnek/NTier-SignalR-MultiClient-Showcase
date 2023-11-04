@@ -7,6 +7,7 @@ namespace CABTEX_HFT_2023241.Models
     public class MyDisk
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(240)]
