@@ -9,6 +9,7 @@ namespace CABTEX_HFT_2023241.Repository
         {
             this.context = context;
         }
+
         public void Create(T item)
         {
             context.Set<T>().Add(item);
