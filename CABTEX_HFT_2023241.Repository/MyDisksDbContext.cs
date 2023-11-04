@@ -1,10 +1,9 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace CABTEX_HFT_2023241.Repository
 {
-    internal class MyDisksDbContext : DbContext
+    public class MyDisksDbContext : DbContext
     {
         public DbSet<DiskType> DiskTypes { get; set; }
         public DbSet<Friend> Friends { get; set; }
