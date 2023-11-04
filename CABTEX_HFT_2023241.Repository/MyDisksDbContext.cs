@@ -49,11 +49,11 @@ namespace CABTEX_HFT_2023241.Repository
                 new DiskType("1#DS/DD#TDK#780"),
                 new DiskType("2#DS/HD#TDK+#1440"),
                 new DiskType("3#DS/DD#Philips#880"),
-            });
+            }); //ID#Type#Vendor#Capacity
 
             modelBuilder.Entity<Friend>().HasData(new Friend[]
             {
-                new Friend("1#Én#0#Itthon"),
+                new Friend("1#Én#+36-007#Itthon"),
                 new Friend("2#Karcsi#+36-555#Hársfa u. 2"),
                 new Friend("3#Gyuri#+36-123#Fő u. 3"),
                 new Friend("4#Béla#+06-155#Szab u. 1"),
@@ -62,21 +62,21 @@ namespace CABTEX_HFT_2023241.Repository
                 new Friend("7#Juli#+36-623#Fő u. 5"),
                 new Friend("8#Árpi#+36-178#Dobó u. 12"),
                 new Friend("9#Fecó#+36-333#Fő u. 51"),
-            });
+            }); //#Id#Name#Tel#Address
 
             modelBuilder.Entity<MyDisk>().HasData(new MyDisk[]
             {
-                new MyDisk("1#Mindenféle#1#1"),
-                new MyDisk("2#LastNinja#1#2"),
+                new MyDisk("1#Mindenféle#5#1"),
+                new MyDisk("2#LastNinja#3#2"),
                 new MyDisk("3#Demos#1#1"),
                 new MyDisk("4#MyStuffs#1#2"),
                 new MyDisk("5#ManiacMansion#1#2"),
-                new MyDisk("6#ZacMcCrackenD1#1#2"),
-                new MyDisk("7#ZacD2#1#2"),
-                new MyDisk("8#Montys#1#1"),
+                new MyDisk("6#ZacMcCrackenD1#8#2"),
+                new MyDisk("7#ZacD2#8#2"),
+                new MyDisk("8#Montys#9#1"),
                 new MyDisk("9#Others#1#1"),
                 new MyDisk("10#Utilities#1#3"),
-            });
+            }); //ID#Label#FriendId#DiskTypeId
 
             modelBuilder.Entity<Software>().HasData(new Software[]
             {
@@ -89,8 +89,8 @@ namespace CABTEX_HFT_2023241.Repository
                 new Software("7#Disk Manager#Unknown#Utility#800"),
                 new Software("8#HexMon#Admin#Utility#50"),
                 new Software("9#Intro Maker#Maniacs of Noise#Demo#500"),
-                new Software("10#Elite#David Braben#Simulation#300"),
-            });
+                new Software("10#Elite#David Braben#Space Sim#300"),
+            }); //ID#SWName#Creator#Genre#Size
 
             modelBuilder.Entity<DiskDirectory>().HasData(new DiskDirectory[]
             {
@@ -108,7 +108,7 @@ namespace CABTEX_HFT_2023241.Repository
                 new DiskDirectory("12#9#3"),
                 new DiskDirectory("13#10#7"),
                 new DiskDirectory("14#10#8"),
-            });
+            }); //ID # DiskId # SwID
         }
     }
 }

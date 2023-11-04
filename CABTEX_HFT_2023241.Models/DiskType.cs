@@ -26,8 +26,8 @@ namespace CABTEX_HFT_2023241.Models
 
             string[] split = line.Split('#');
             Id = int.Parse(split[0]);
-            VendorName = split[1];
-            TypeName = split[2];
+            TypeName = split[1];
+            VendorName = split[2];
             Capacity = int.Parse(split[3]);
         }
 
