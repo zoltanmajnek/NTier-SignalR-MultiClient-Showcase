@@ -1,5 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace CABTEX_HFT_2023241.Repository
 {
@@ -22,50 +23,59 @@ namespace CABTEX_HFT_2023241.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Worker>()
-            //    .HasOne(x => x.Company)
-            //    .WithMany(x => x.Workers)
-            //    .HasForeignKey(x => x.CompanyID)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<MyDisk>(type => type
+                .HasOne(type => type.DiskType)
+                .WithMany(disk => disk.Disks)
+                .HasForeignKey(type => type.TypeId)
+                .OnDelete(DeleteBehavior.Cascade));
 
-            //modelBuilder.Entity<Company>()
-            //    .HasOne(x => x.Country)
-            //    .WithMany(x => x.Companies)
-            //    .HasForeignKey(x => x.CountryId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<MyDisk>()
+                .HasMany(x => x.Softwares)
+                .WithMany(x => x.Disks)
+                .UsingEntity<DiskDirectory>(
+                    x => x.HasOne(x => x.Software)
+                        .WithMany().HasForeignKey(x => x.SoftwareId).OnDelete(DeleteBehavior.Cascade),
+                    x => x.HasOne(x => x.MyDisk)
+                        .WithMany().HasForeignKey(x => x.DiskId).OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<MyDisk>(friend => friend
+                .HasOne(disk => disk.Friend)
+                .WithMany(friend => friend.Disks)
+                .HasForeignKey(disk => disk.FriendId)
+                .OnDelete(DeleteBehavior.Cascade));
 
             modelBuilder.Entity<DiskType>().HasData(new DiskType[]
             {
-                new DiskType("DS/DD#TDK#780"),
-                new DiskType("DS/HD#TDK+#1440"),
-                new DiskType("DS/DD#Philips#880"),
+                new DiskType("1#DS/DD#TDK#780"),
+                new DiskType("2#DS/HD#TDK+#1440"),
+                new DiskType("3#DS/DD#Philips#880"),
             });
 
             modelBuilder.Entity<Friend>().HasData(new Friend[]
             {
-                new Friend("Én#0#Itthon"),
-                new Friend("Karcsi#+36-555#Hársfa u. 2"),
-                new Friend("Gyuri#+36-123#Fő u. 3"),
-                new Friend("Béla#+06-155#Szab u. 1"),
-                new Friend("Timi#+36-121#Szab u. 13"),
-                new Friend("Niki#+36-557#Hársfa u. 2"),
-                new Friend("Juli#+36-623#Fő u. 5"),
-                new Friend("Árpi#+36-178#Dobó u. 12"),
-                new Friend("Fecó#+36-333#Fő u. 51"),
+                new Friend("1#Én#0#Itthon"),
+                new Friend("2#Karcsi#+36-555#Hársfa u. 2"),
+                new Friend("3#Gyuri#+36-123#Fő u. 3"),
+                new Friend("4#Béla#+06-155#Szab u. 1"),
+                new Friend("5#Timi#+36-121#Szab u. 13"),
+                new Friend("6#Niki#+36-557#Hársfa u. 2"),
+                new Friend("7#Juli#+36-623#Fő u. 5"),
+                new Friend("8#Árpi#+36-178#Dobó u. 12"),
+                new Friend("9#Fecó#+36-333#Fő u. 51"),
             });
 
             modelBuilder.Entity<MyDisk>().HasData(new MyDisk[]
             {
-                new MyDisk("1#Mindenféle"),
-                new MyDisk("2#LastNinja"),
-                new MyDisk("3#Demos"),
-                new MyDisk("4#MyStuffs"),
-                new MyDisk("5#ManiacMansion"),
-                new MyDisk("6#ZacMcCrackenD1"),
-                new MyDisk("7#ZacD2"),
-                new MyDisk("8#Montys"),
-                new MyDisk("9#Others"),
-                new MyDisk("10#Utilities"),
+                new MyDisk("1#Mindenféle#1#1"),
+                new MyDisk("2#LastNinja#1#2"),
+                new MyDisk("3#Demos#1#1"),
+                new MyDisk("4#MyStuffs#1#2"),
+                new MyDisk("5#ManiacMansion#1#2"),
+                new MyDisk("6#ZacMcCrackenD1#1#2"),
+                new MyDisk("7#ZacD2#1#2"),
+                new MyDisk("8#Montys#1#1"),
+                new MyDisk("9#Others#1#1"),
+                new MyDisk("10#Utilities#1#3"),
             });
 
             modelBuilder.Entity<Software>().HasData(new Software[]
@@ -95,7 +105,6 @@ namespace CABTEX_HFT_2023241.Repository
                 new DiskDirectory("7#2"),
                 new DiskDirectory("8#4"),
                 new DiskDirectory("8#5"),
-                new DiskDirectory("9#3"),
                 new DiskDirectory("9#3"),
                 new DiskDirectory("10#7"),
                 new DiskDirectory("10#8"),

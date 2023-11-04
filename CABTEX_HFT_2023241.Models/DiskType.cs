@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +8,7 @@ namespace CABTEX_HFT_2023241.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public int Capacity { get; set; }
 
@@ -18,18 +18,22 @@ namespace CABTEX_HFT_2023241.Models
         [StringLength(20)]
         public string TypeName { get; set; }
 
+        public virtual ICollection<MyDisk> Disks { get; set; }
+
         public DiskType(string line)
         {
-            Id = Guid.NewGuid().ToString();
+            Disks = new List<MyDisk>();
+
             string[] split = line.Split('#');
-            VendorName = split[0];
-            TypeName = split[1];
-            Capacity = int.Parse(split[2]);
+            Id = int.Parse(split[0]);
+            VendorName = split[1];
+            TypeName = split[2];
+            Capacity = int.Parse(split[3]);
         }
 
         public DiskType()
         {
-            Id = Guid.NewGuid().ToString();
+            Disks = new List<MyDisk>();
         }
     }
 }

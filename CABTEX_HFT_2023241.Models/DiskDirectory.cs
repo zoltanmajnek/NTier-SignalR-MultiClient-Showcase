@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System;
-using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CABTEX_HFT_2023241.Models
 {

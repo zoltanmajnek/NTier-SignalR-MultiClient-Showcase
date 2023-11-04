@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 
 namespace CABTEX_HFT_2023241.Models
 {
@@ -13,15 +14,15 @@ namespace CABTEX_HFT_2023241.Models
         [StringLength(240)]
         public string Label { get; set; }
 
-        public virtual Friend Friend { get; set; }
-        public virtual DiskType DiskType { get; set; }
-
         [ForeignKey(nameof(Friend))]
-        public string FriendId { get; set; }
+        public int FriendId { get; set; }
+        public virtual Friend Friend { get; set; }
 
         [ForeignKey(nameof(DiskType))]
-        public string TypeId { get; set; }
+        public int TypeId { get; set; }
+        public virtual DiskType DiskType { get; set; }
 
+        public virtual ICollection<Software> Softwares { get; set; }
         public virtual ICollection<DiskDirectory> DiskDirectories { get; set; }
 
         public MyDisk() { }
@@ -31,6 +32,8 @@ namespace CABTEX_HFT_2023241.Models
             string[] split = line.Split('#');
             Id = int.Parse(split[0]);
             Label = split[1];
+            FriendId = int.Parse(split[2]);
+            TypeId = int.Parse(split[3]);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace CABTEX_HFT_2023241.Models
         public string Genre { get; set; }
         public int Size { get; set; }
 
+        public virtual ICollection<MyDisk> Disks { get; set; }
         public virtual ICollection<DiskDirectory> DiskDirectories { get; set; }
 
         public Software() { }

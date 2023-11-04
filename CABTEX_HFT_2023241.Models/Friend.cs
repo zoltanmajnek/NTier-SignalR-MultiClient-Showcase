@@ -10,7 +10,7 @@ namespace CABTEX_HFT_2023241.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [StringLength(240)]
         public string Name { get; set; }
@@ -25,19 +25,18 @@ namespace CABTEX_HFT_2023241.Models
 
         public Friend()
         {
-            Id = Guid.NewGuid().ToString();
             Disks = new List<MyDisk>();
         }
 
         public Friend(string line)
         {
-            Id = Guid.NewGuid().ToString();
             Disks = new List<MyDisk>();
 
             string[] split = line.Split('#');
-            Name = split[0];
-            PhoneNumber = split[1];
-            Address = split[2];
+            Id = int.Parse(split[0]);
+            Name = split[1];
+            PhoneNumber = split[2];
+            Address = split[3];
         }
     }
 }
