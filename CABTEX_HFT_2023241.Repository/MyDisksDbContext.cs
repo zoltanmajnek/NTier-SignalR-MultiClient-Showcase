@@ -1,6 +1,5 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace CABTEX_HFT_2023241.Repository
 {
@@ -10,6 +9,7 @@ namespace CABTEX_HFT_2023241.Repository
         public DbSet<Friend> Friends { get; set; }
         public DbSet<MyDisk> MyDisks { get; set; }
         public DbSet<DiskDirectory> DiskDir { get; set; }
+        public DbSet<Software> Softwares { get; set; }
 
         public MyDisksDbContext()
         {
