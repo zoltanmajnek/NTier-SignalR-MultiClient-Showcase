@@ -1,5 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace CABTEX_HFT_2023241.Repository
 {
@@ -93,20 +94,20 @@ namespace CABTEX_HFT_2023241.Repository
 
             modelBuilder.Entity<DiskDirectory>().HasData(new DiskDirectory[]
             {
-                new DiskDirectory("1#4"),
-                new DiskDirectory("1#10"),
-                new DiskDirectory("1#8"),
-                new DiskDirectory("2#6"),
-                new DiskDirectory("3#9"),
-                new DiskDirectory("4#8"),
-                new DiskDirectory("5#1"),
-                new DiskDirectory("6#2"),
-                new DiskDirectory("7#2"),
-                new DiskDirectory("8#4"),
-                new DiskDirectory("8#5"),
-                new DiskDirectory("9#3"),
-                new DiskDirectory("10#7"),
-                new DiskDirectory("10#8"),
+                new DiskDirectory("1#1#4"),
+                new DiskDirectory("2#1#10"),
+                new DiskDirectory("3#1#8"),
+                new DiskDirectory("4#2#6"),
+                new DiskDirectory("5#3#9"),
+                new DiskDirectory("6#4#8"),
+                new DiskDirectory("7#5#1"),
+                new DiskDirectory("8#6#2"),
+                new DiskDirectory("9#7#2"),
+                new DiskDirectory("10#8#4"),
+                new DiskDirectory("11#8#5"),
+                new DiskDirectory("12#9#3"),
+                new DiskDirectory("13#10#7"),
+                new DiskDirectory("14#10#8"),
             });
         }
     }

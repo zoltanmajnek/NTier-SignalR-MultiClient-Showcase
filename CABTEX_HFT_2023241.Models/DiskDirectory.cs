@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CABTEX_HFT_2023241.Models
@@ -8,7 +7,7 @@ namespace CABTEX_HFT_2023241.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public virtual MyDisk MyDisk { get; set; }
         [Required]
@@ -20,18 +19,14 @@ namespace CABTEX_HFT_2023241.Models
         [ForeignKey(nameof(Software))]
         public int SoftwareId { get; set; }
 
-        public DiskDirectory()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+        public DiskDirectory() { }
 
         public DiskDirectory(string line)
         {
-            Id = Guid.NewGuid().ToString();
-
             string[] split = line.Split('#');
-            DiskId = int.Parse(split[0]);
-            SoftwareId = int.Parse(split[1]);
+            Id = int.Parse(split[0]);
+            DiskId = int.Parse(split[1]);
+            SoftwareId = int.Parse(split[2]);
         }
     }
 }
