@@ -13,6 +13,7 @@ namespace CABTEX_HFT_2023241.Models
 
         public string Name { get; set; }
         public string Creator { get; set; }
+        public string Genre { get; set; }
         public int Size { get; set; }
 
         public Software()
@@ -27,7 +28,8 @@ namespace CABTEX_HFT_2023241.Models
             string[] split = line.Split('#');
             Name = split[0];
             Creator = split[1];
-            Size = int.Parse(split[2]);
+            Genre = split[2];
+            Size = int.Parse(split[3]);
         }
     }
 }

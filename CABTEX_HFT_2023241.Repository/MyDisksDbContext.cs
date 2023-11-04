@@ -70,15 +70,16 @@ namespace CABTEX_HFT_2023241.Repository
             
             modelBuilder.Entity<Software>().HasData(new Software[]
             {
-                new Software("Maniac Mansion#LucasFilm Games#1200"),
-                new Software("Zac McCracken#LucasFilm Games#2500"),
-                new Software("Monty on the Run#Gremlin Graphics#150"),
-                new Software("Auf widersehen Monty#Gremlin Graphics#200"),
-                new Software("Last Ninja#System 3#900"),
-                new Software("Disk Manager#Util#800"),
-                new Software("HexMon#Util#50"),
-                new Software("Intro Maker#Maniacs of Noise#500"),
-                new Software("Elite#David Braben#300"),
+                new Software("Maniac Mansion#LucasFilm Games#Adventure#1200"),
+                new Software("Zac McCracken#LucasFilm Games#Adventure#2500"),
+                new Software("Bard's Tale III#Interplay#RPG#150"),
+                new Software("Monty on the Run#Gremlin Graphics#Arcade#150"),                
+                new Software("Auf widersehen Monty#Gremlin Graphics#Arcade#200"),
+                new Software("Last Ninja#System 3#Arcade#900"),
+                new Software("Disk Manager#Unknown#Utility#800"),
+                new Software("HexMon#Admin#Utility#50"),
+                new Software("Intro Maker#Maniacs of Noise#Demo#500"),
+                new Software("Elite#David Braben#Simulation#300"),
             });
         }
     }
