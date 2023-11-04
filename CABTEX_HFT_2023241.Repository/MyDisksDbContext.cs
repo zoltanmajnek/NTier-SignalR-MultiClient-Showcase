@@ -59,7 +59,7 @@ namespace CABTEX_HFT_2023241.Repository
                 new MyDisk("1#Mindenféle"),
                 new MyDisk("2#LastNinja"),
                 new MyDisk("3#Demos"),
-                new MyDisk("4#MoreDemos"),
+                new MyDisk("4#MyStuffs"),
                 new MyDisk("5#ManiacMansion"),
                 new MyDisk("6#ZacMcCrackenD1"),
                 new MyDisk("7#ZacD2"),
@@ -67,7 +67,19 @@ namespace CABTEX_HFT_2023241.Repository
                 new MyDisk("9#Others"),
                 new MyDisk("10#Utilities"),
             });
-
+            
+            modelBuilder.Entity<Software>().HasData(new Software[]
+            {
+                new Software("Maniac Mansion#LucasFilm Games#1200"),
+                new Software("Zac McCracken#LucasFilm Games#2500"),
+                new Software("Monty on the Run#Gremlin Graphics#150"),
+                new Software("Auf widersehen Monty#Gremlin Graphics#200"),
+                new Software("Last Ninja#System 3#900"),
+                new Software("Disk Manager#Util#800"),
+                new Software("HexMon#Util#50"),
+                new Software("Intro Maker#Maniacs of Noise#500"),
+                new Software("Elite#David Braben#300"),
+            });
         }
     }
 }
