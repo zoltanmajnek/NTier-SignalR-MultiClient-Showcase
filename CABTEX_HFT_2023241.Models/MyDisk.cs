@@ -27,7 +27,7 @@ namespace CABTEX_HFT_2023241.Models
         {
             string[] split = line.Split('#');
             Id = int.Parse(split[0]);
-            Label = split[0];
+            Label = split[1];
         }
     }
 }
