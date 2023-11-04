@@ -4,10 +4,11 @@ using System;
 
 namespace CABTEX_HFT_2023241.Models
 {
-    public class DiskContainsSoftware
+    public class DiskDirectory
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
         public string Id { get; set; }
 
         [Required]
@@ -18,7 +19,9 @@ namespace CABTEX_HFT_2023241.Models
         [ForeignKey(nameof(Software))]
         public string SoftwareId { get; set; }
 
-        public DiskContainsSoftware()
+
+
+        public DiskDirectory()
         {
             Id = Guid.NewGuid().ToString();
         }
