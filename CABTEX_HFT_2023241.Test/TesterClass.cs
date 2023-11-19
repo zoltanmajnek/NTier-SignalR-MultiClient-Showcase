@@ -30,7 +30,7 @@ namespace CABTEX_HFT_2023241.Test
             ;
 
             //First disk has 780 blocks total, has 3 software: 150+50+300, free space should be 780-500
-            Assert.That(MyDl.FreeSpaceonTheDisk(1), Is.EqualTo(280));
+            Assert.That(MyDl.FreeSpaceOnTheDisk(1), Is.EqualTo(280));
 
             Assert.That(()=>MyDl.Read(15), Throws.TypeOf<ArgumentException>());
         }

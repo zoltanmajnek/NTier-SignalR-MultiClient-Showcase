@@ -44,7 +44,7 @@ namespace CABTEX_HFT_2023241.Logic
             this.repo.Update(item);
         }
 
-        public int FreeSpaceonTheDisk(int id)
+        public int FreeSpaceOnTheDisk(int id)
         {
             var disk = Read(id);
             int blocksFree = disk.DiskType.Capacity - disk.Softwares.Sum(s => s.Size);
