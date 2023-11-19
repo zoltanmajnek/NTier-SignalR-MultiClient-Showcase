@@ -1,5 +1,7 @@
-﻿using CABTEX_HFT_2023241.Repository;
+﻿using CABTEX_HFT_2023241.Logic;
+using CABTEX_HFT_2023241.Repository;
 using NUnit.Framework;
+using System;
 
 namespace CABTEX_HFT_2023241.Test
 {
@@ -19,6 +21,23 @@ namespace CABTEX_HFT_2023241.Test
             ;
 
             Assert.That(sw, Is.Not.Null);
+
+            var sl = new SoftwareLogic(sw);
+            var fl = new FriendLogic(f);
+            var ddirl = new DiskDirectoryLogic(ddir);
+            var MyDl = new MyDiskLogic(MyD);
+            var dtypel = new DiskTypeLogic(dtype);
+            ;
+
+            //First disk has 780 blocks total, has 3 software: 150+50+300, free space should be 780-500
+            Assert.That(MyDl.FreeSpaceonTheDisk(1), Is.EqualTo(280));
+
+            Assert.That(()=>MyDl.Read(15), Throws.TypeOf<ArgumentException>());
         }
+
+        //[Test]
+        //public void FirstTest()
+        //{
+        //}
     }
 }
