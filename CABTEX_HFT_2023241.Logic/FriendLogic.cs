@@ -37,5 +37,12 @@ namespace CABTEX_HFT_2023241.Logic
         {
             this.repo.Update(item);
         }
+
+        public Friend WhoHasTheMostDisks()
+        {
+            var friends = ReadAll();
+            int maxDisk = friends.Max(f=>f.Disks.Count);
+            return friends.First(f=>f.Disks.Count==maxDisk);
+        }
     }
 }
