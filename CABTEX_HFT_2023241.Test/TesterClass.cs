@@ -33,6 +33,8 @@ namespace CABTEX_HFT_2023241.Test
             Assert.That(MyDl.FreeSpaceOnTheDisk(1), Is.EqualTo(280));
 
             Assert.That(()=>MyDl.Read(15), Throws.TypeOf<ArgumentException>());
+                        
+            Assert.That(fl.WhoHasTheMostDisks().Name, Is.EqualTo("Én"));
         }
 
         //[Test]
