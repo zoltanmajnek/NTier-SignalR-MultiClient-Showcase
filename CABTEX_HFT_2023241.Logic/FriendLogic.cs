@@ -46,13 +46,9 @@ namespace CABTEX_HFT_2023241.Logic
             return friends.First(f => f.Disks.Count == maxDisk);
         }
 
-        public List<Friend> WhoHasThisSoftware(string swName, MyDiskLogic dL, SoftwareLogic sL)
+        public List<Friend> WhoHasThisSoftware(string swName, MyDiskLogic diskLogic, SoftwareLogic swLogic)
         {
-            var friendList = new List<Friend>();
-            foreach (var disk in dL.ContainsaGivenSoftware(swName, sL)) friendList.Add(Read(disk.FriendId));
-
-            return friendList.Distinct().ToList();
+            return diskLogic.ContainsaGivenSoftware(swName, swLogic).Select(d=>d.Friend).Distinct().ToList();
         }
-
     }
 }
