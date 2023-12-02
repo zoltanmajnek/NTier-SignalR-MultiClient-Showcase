@@ -37,5 +37,11 @@ namespace CABTEX_HFT_2023241.Logic
         {
             this.repo.Update(item);
         }
+
+        public Software ReadByName (string swName)
+        {
+            swName = swName.ToUpper();
+            return ReadAll().Where(s=>s.Name.ToUpper().Equals(swName)).FirstOrDefault();
+        }
     }
 }

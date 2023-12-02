@@ -1,6 +1,7 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -50,6 +51,11 @@ namespace CABTEX_HFT_2023241.Logic
             int blocksFree = disk.DiskType.Capacity - disk.Softwares.Sum(s => s.Size);
             if (blocksFree < 0) blocksFree = 0; //if a software doesn't fit on a single disk, free space is zero not negative
             return blocksFree;
+        }
+
+        public List<MyDisk> ContainsaGivenSoftware(string swName, SoftwareLogic sL)
+        {            
+            return ReadAll().Where(d=>d.Softwares.Contains(sL.ReadByName(swName))).ToList();
         }
     }
 }

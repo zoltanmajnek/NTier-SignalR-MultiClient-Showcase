@@ -27,7 +27,6 @@ namespace CABTEX_HFT_2023241.Test
             var ddirl = new DiskDirectoryLogic(ddir);
             var MyDl = new MyDiskLogic(MyD);
             var dtypel = new DiskTypeLogic(dtype);
-            ;
 
             //First disk has 780 blocks total, has 3 software: 150+50+300, free space should be 780-500
             Assert.That(MyDl.FreeSpaceOnTheDisk(1), Is.EqualTo(280));
@@ -35,6 +34,9 @@ namespace CABTEX_HFT_2023241.Test
             Assert.That(()=>MyDl.Read(15), Throws.TypeOf<ArgumentException>());
                         
             Assert.That(fl.WhoHasTheMostDisks().Name, Is.EqualTo("Én"));
+
+            var WhichDisksContainsHexmon = MyDl.ContainsaGivenSoftware("HexMon",sl);
+            ;
         }
 
         //[Test]
