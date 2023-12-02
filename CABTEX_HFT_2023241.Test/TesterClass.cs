@@ -31,12 +31,17 @@ namespace CABTEX_HFT_2023241.Test
             //First disk has 780 blocks total, has 3 software: 150+50+300, free space should be 780-500
             Assert.That(MyDl.FreeSpaceOnTheDisk(1), Is.EqualTo(280));
 
-            Assert.That(()=>MyDl.Read(15), Throws.TypeOf<ArgumentException>());
-                        
+            Assert.That(() => MyDl.Read(15), Throws.TypeOf<ArgumentException>());
+
             Assert.That(fl.WhoHasTheMostDisks().Name, Is.EqualTo("Én"));
 
-            var WhichDisksContainsHexmon = MyDl.ContainsaGivenSoftware("HexMon",sl);
+            var WhichDisksContainsHexmon = MyDl.ContainsaGivenSoftware("HexMon", sl);
+
+            var WhoHasLastNinja = fl.WhoHasThisSoftware("Last Ninja", MyDl, sl);
+            var ThisShouldbeNull = fl.WhoHasThisSoftware("nothinghere", MyDl, sl);
+            var WhoHasHexmon = fl.WhoHasThisSoftware("hexmon", MyDl, sl);
             ;
+
         }
 
         //[Test]
