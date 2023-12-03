@@ -1,5 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
+using System;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -13,9 +14,12 @@ namespace CABTEX_HFT_2023241.Logic
             this.repo = repo;
         }
 
-        public void Create(DiskType item)
+        public void Create(DiskType dType)
         {
-            this.repo.Create(item);
+            if (dType.Capacity<=0)
+                throw new ArgumentException("Wrong disk capacity given.");
+
+            this.repo.Create(dType);
         }
 
         public void Delete(int id)

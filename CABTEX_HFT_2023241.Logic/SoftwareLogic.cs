@@ -1,5 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
+using System;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -13,9 +14,12 @@ namespace CABTEX_HFT_2023241.Logic
             this.repo = repo;
         }
 
-        public void Create(Software item)
+        public void Create(Software software)
         {
-            this.repo.Create(item);
+            if (software?.Name == null || software.Name.Length < 1)
+                throw new ArgumentException("Need a Label, at least 1 character.");
+
+            this.repo.Create(software);
         }
 
         public void Delete(int id)
@@ -38,10 +42,10 @@ namespace CABTEX_HFT_2023241.Logic
             this.repo.Update(item);
         }
 
-        public Software ReadByName (string swName)
+        public Software ReadByName(string swName)
         {
             swName = swName.ToUpper();
-            return ReadAll().Where(s=>s.Name.ToUpper().Equals(swName)).FirstOrDefault();
+            return ReadAll().Where(s => s.Name.ToUpper().Equals(swName)).FirstOrDefault();
         }
     }
 }

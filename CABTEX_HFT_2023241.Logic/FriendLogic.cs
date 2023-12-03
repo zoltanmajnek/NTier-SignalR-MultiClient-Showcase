@@ -1,5 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,9 +15,12 @@ namespace CABTEX_HFT_2023241.Logic
             this.repo = repo;
         }
 
-        public void Create(Friend item)
+        public void Create(Friend friend)
         {
-            this.repo.Create(item);
+            if (friend?.Name == null || friend.Name.Length < 2)
+                throw new ArgumentException("Need a Name, at least 2 char long.");
+
+            this.repo.Create(friend);
         }
 
         public void Delete(int id)
@@ -46,9 +50,9 @@ namespace CABTEX_HFT_2023241.Logic
             return friends.First(f => f.Disks.Count == maxDisk);
         }
 
-        public List<Friend> WhoHasThisSoftware(string swName, MyDiskLogic diskLogic, SoftwareLogic swLogic)
+        public IEnumerable<Friend> WhoHasThisSoftware(string swName, MyDiskLogic diskLogic, SoftwareLogic swLogic)
         {
-            return diskLogic.ContainsaGivenSoftware(swName, swLogic).Select(d=>d.Friend).Distinct().ToList();
+            return diskLogic.ContainsaGivenSoftware(swName, swLogic).Select(d => d.Friend).Distinct();
         }
     }
 }

@@ -15,9 +15,12 @@ namespace CABTEX_HFT_2023241.Logic
             this.repo = repo;
         }
 
-        public void Create(MyDisk item)
+        public void Create(MyDisk disk)
         {
-            this.repo.Create(item);
+            if (disk?.Label==null || disk.Label.Length<2)
+                throw new ArgumentException("Need a Label, at least 2 char long.");
+
+            this.repo.Create(disk);
         }
 
         public void Delete(int id)
@@ -53,9 +56,9 @@ namespace CABTEX_HFT_2023241.Logic
             return blocksFree;
         }
 
-        public List<MyDisk> ContainsaGivenSoftware(string swName, SoftwareLogic sL)
+        public IEnumerable<MyDisk> ContainsaGivenSoftware(string swName, SoftwareLogic sL)
         {
-            return ReadAll().Where(d => d.Softwares.Contains(sL.ReadByName(swName))).ToList();
+            return ReadAll().Where(d => d.Softwares.Contains(sL.ReadByName(swName)));
         }
     }
 }

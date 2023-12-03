@@ -2,6 +2,7 @@
 using CABTEX_HFT_2023241.Repository;
 using NUnit.Framework;
 using System;
+using System.Linq;
 
 namespace CABTEX_HFT_2023241.Test
 {
@@ -39,7 +40,7 @@ namespace CABTEX_HFT_2023241.Test
 
             var WhoHasLastNinja = fl.WhoHasThisSoftware("Last Ninja", MyDl, sl);
             var ThisShouldbeNull = fl.WhoHasThisSoftware("nothinghere", MyDl, sl);
-            var WhoHasHexmon = fl.WhoHasThisSoftware("hexmon", MyDl, sl);
+            var WhoHasHexmon = fl.WhoHasThisSoftware("hexmon", MyDl, sl).ToList();
             ;
 
         }
