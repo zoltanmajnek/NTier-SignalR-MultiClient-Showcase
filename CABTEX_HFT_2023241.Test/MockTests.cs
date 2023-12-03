@@ -156,12 +156,65 @@ namespace CABTEX_HFT_2023241.Test
         }
 
         [Test]
+        public void CreateGoodDiskType()
+        {
+            var dType = new DiskType() { Capacity = 101 };
+            diskTypeLogic.Create(dType);
+            mockDiskTypeRepo.Verify(r => r.Create(dType), Times.Once);
+        }
+
+        [Test]
         public void SoftwareSearchByNameTest()
         {
             var software = softwareLogic.ReadByName("Elite");
-            Assert.That(software.Id,Is.EqualTo(10));
+            Assert.That(software.Id, Is.EqualTo(10));
         }
 
+        [Test]
+        public void GenreSelectTest()
+        {
+            var swList = softwareLogic.Genre("RPG").ToList();
+            Assert.That(swList.First(), Is.EqualTo("Bard's Tale III"));
 
+            swList = softwareLogic.Genre("Adventure").ToList();
+            Assert.That(swList.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void AvgGenreSizeTest()
+        {
+            var avgSize = softwareLogic.AvgSizeInaGenre("Arcade");
+            var avgSizeOfall = softwareLogic.AvgSizeInaGenre("*");
+
+            Assert.That(Math.Round((decimal)avgSize), Is.EqualTo(417));
+            Assert.That(Math.Round((decimal)avgSizeOfall), Is.EqualTo(715));
+        }
+
+        [Test]
+        public void AvgException()
+        {
+            Assert.That(() => softwareLogic.AvgSizeInaGenre("Arcaade"), Throws.TypeOf<ArgumentException>());
+        }
+
+        [Test]
+        public void WhoLiveInThisStreetTest()
+        {
+            var friends = friendLogic.WhoLiveInMyStreet("Fő").ToList();
+            Assert.That(friends.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public void DiskWithTheMostSoftwareTest()
+        {
+            var diskId = diskDirectoryLogic.DiskIdWithMaxSoftware();
+            Assert.That(diskId, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void LargestDiskVendorName()
+        {
+            var vendorName = diskTypeLogic.LargestDiskVendorName();
+            Assert.That(vendorName, Is.EqualTo("TDK+"));
+        }
     }
 }

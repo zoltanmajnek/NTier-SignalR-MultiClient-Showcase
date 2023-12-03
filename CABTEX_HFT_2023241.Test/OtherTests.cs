@@ -18,28 +18,28 @@ namespace CABTEX_HFT_2023241.Test
         FriendLogic friendLogic;
         DiskDirectoryLogic diskDirectoryLogic;
 
-        MyDisksDbContext db;
-        SoftwareRepository sw;
-        FriendRepository f;
-        DiskDirectoryRepository ddir;
-        MyDiskRepository MyD;
-        DiskTypeRepository dtype;
+        MyDisksDbContext dbContext;
+        SoftwareRepository softwareRepo;
+        FriendRepository friendRepo;
+        DiskDirectoryRepository directoryRepo;
+        MyDiskRepository diskRepo;
+        DiskTypeRepository diskTypeRepo;
 
         [SetUp]
         public void Init() 
         {
-            db = new MyDisksDbContext();
-            sw = new SoftwareRepository(db);
-            f = new FriendRepository(db);
-            ddir = new DiskDirectoryRepository(db);
-            MyD = new MyDiskRepository(db);
-            dtype = new DiskTypeRepository(db);
+            dbContext = new MyDisksDbContext();
+            softwareRepo = new SoftwareRepository(dbContext);
+            friendRepo = new FriendRepository(dbContext);
+            directoryRepo = new DiskDirectoryRepository(dbContext);
+            diskRepo = new MyDiskRepository(dbContext);
+            diskTypeRepo = new DiskTypeRepository(dbContext);
 
-            softwareLogic = new SoftwareLogic(sw);
-            friendLogic = new FriendLogic(f, sw, MyD);
-            diskDirectoryLogic = new DiskDirectoryLogic(ddir);
-            myDiskLogic = new MyDiskLogic(MyD, sw);
-            diskTypeLogic = new DiskTypeLogic(dtype);
+            softwareLogic = new SoftwareLogic(softwareRepo);
+            friendLogic = new FriendLogic(friendRepo, softwareRepo, diskRepo);
+            diskDirectoryLogic = new DiskDirectoryLogic(directoryRepo);
+            myDiskLogic = new MyDiskLogic(diskRepo, softwareRepo);
+            diskTypeLogic = new DiskTypeLogic(diskTypeRepo);
         }
 
         [Test]

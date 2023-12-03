@@ -1,4 +1,5 @@
 ﻿using CABTEX_HFT_2023241.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -11,5 +12,7 @@ namespace CABTEX_HFT_2023241.Logic
         IQueryable<Software> ReadAll();
         void Update(Software item);
         Software ReadByName(string name);
+        public IEnumerable<string> Genre(string genre);
+        public double? AvgSizeInaGenre(string genre);
     }
 }

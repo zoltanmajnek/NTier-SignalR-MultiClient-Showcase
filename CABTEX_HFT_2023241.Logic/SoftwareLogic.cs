@@ -1,6 +1,7 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -46,6 +47,22 @@ namespace CABTEX_HFT_2023241.Logic
         {
             swName = swName.ToUpper();
             return ReadAll().Where(s => s.Name.ToUpper().Equals(swName)).FirstOrDefault();
+        }
+
+        public IEnumerable<string> Genre(string genre)
+        {
+            return ReadAll().Where(s => s.Genre == genre).Select(s => s.Name);
+        }
+
+        public double? AvgSizeInaGenre(string genre)
+        {
+            var allInGen = ReadAll().Where(s => s.Genre == genre).Select(s => s.Size);
+            if (!allInGen.Any())
+            {
+                if (genre=="*") allInGen = ReadAll().Select(s => s.Size);
+                else throw new ArgumentException("No such genre");
+            }
+            return allInGen.Average();
         }
     }
 }

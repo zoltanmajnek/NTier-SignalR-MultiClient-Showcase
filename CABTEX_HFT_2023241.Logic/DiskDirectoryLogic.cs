@@ -15,27 +15,41 @@ namespace CABTEX_HFT_2023241.Logic
 
         public void Create(DiskDirectory item)
         {
-            this.repo.Create(item);
+            repo.Create(item);
         }
 
         public void Delete(int id)
         {
-            this.repo.Delete(id);
+            repo.Delete(id);
         }
 
         public DiskDirectory Read(int id)
         {
-            return this.repo.Read(id);
+            return repo.Read(id);
         }
 
         public IQueryable<DiskDirectory> ReadAll()
         {
-            return this.repo.ReadAll();
+            return repo.ReadAll();
         }
 
         public void Update(DiskDirectory item)
         {
-            this.repo.Update(item);
+            repo.Update(item);
         }
+
+        public int? DiskIdWithMaxSoftware()
+        {
+            var result = ReadAll().GroupBy(d=> d.DiskId)
+                           .Select(group => new
+                           {
+                               DiskId = group.Key,
+                               Count = group.Count()
+                           })
+                           .OrderByDescending(group => group.Count)
+                           .FirstOrDefault();
+            return result?.DiskId;
+        }
+
     }
 }

@@ -13,5 +13,6 @@ namespace CABTEX_HFT_2023241.Logic
         void Update(Friend item);
         Friend WhoHasTheMostDisks();
         IEnumerable<Friend> WhoHasThisSoftware(string swName);
+        public IEnumerable<string> WhoLiveInMyStreet(string address);
     }
 }

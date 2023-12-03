@@ -56,12 +56,17 @@ namespace CABTEX_HFT_2023241.Logic
 
         public IEnumerable<Friend> WhoHasThisSoftware(string swName)
         {
-            //Először sw és disk logic paraméterben átadásával meghívtam kész logicokat,
-            //de csak a repokat ismerheti a logic, más logic-ot nem?
+            //Először sw és disk logic paraméterben átadásával meghívtam a már kész logicokat,
+            //de inkább csak a repokat ismerheti a logic, más logic-ot nem?
             swName = swName.ToUpper();
             var software = swRepo.ReadAll().Where(s => s.Name.ToUpper().Equals(swName)).FirstOrDefault();
             var whichdisks = diskRepo.ReadAll().Where(d => d.Softwares.Contains(software));            
             return whichdisks.Select(d => d.Friend).Distinct();
+        }
+
+        public IEnumerable<string> WhoLiveInMyStreet(string address)
+        {
+            return ReadAll().Where(f=>f.Address.Contains(address)).Select(f=>f.Name);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CABTEX_HFT_2023241.Logic
 
         public void Create(DiskType dType)
         {
-            if (dType.Capacity<=0)
+            if (dType.Capacity <= 0)
                 throw new ArgumentException("Wrong disk capacity given.");
 
             this.repo.Create(dType);
@@ -41,5 +41,9 @@ namespace CABTEX_HFT_2023241.Logic
         {
             this.repo.Update(item);
         }
+
+        public string LargestDiskVendorName()
+            => repo.ReadAll().Where(dt => dt.Capacity == repo.ReadAll().Max(dt => dt.Capacity))
+            .Select(dt=>dt.VendorName).FirstOrDefault();
     }
 }
