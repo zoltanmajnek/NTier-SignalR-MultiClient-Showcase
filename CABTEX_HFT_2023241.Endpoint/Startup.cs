@@ -51,7 +51,7 @@ namespace CABTEX_HFT_2023241.Endpoint
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MovieDbApp.Endpoint v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CABTEX_HFT_2023231.Endpoint v1"));
             }
 
             app.UseExceptionHandler(c => c.Run(async context =>
