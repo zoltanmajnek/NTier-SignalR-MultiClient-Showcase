@@ -50,6 +50,5 @@ namespace CABTEX_HFT_2023241.Logic
                            .FirstOrDefault();
             return result?.DiskId;
         }
-
     }
 }

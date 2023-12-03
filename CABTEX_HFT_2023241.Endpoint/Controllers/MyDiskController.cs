@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CABTEX_HFT_2023241.Logic;
+﻿using CABTEX_HFT_2023241.Logic;
 using CABTEX_HFT_2023241.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CABTEX_HFT_2023241.Endpoint.Controllers
 {
-    [Route("[controller]/[action]")]
+    [Route("[controller]")]
     [ApiController]
     public class MyDiskController : ControllerBase
     {
@@ -32,18 +29,6 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         public MyDisk Read(int id)
         {
             return logic.Read(id);
-        }
-
-        [HttpGet("{id}")]
-        public int? FreeSpace(int id)
-        {
-            return logic.FreeSpaceOnTheDisk(id);
-        }
-
-        [HttpGet("{swName}")]
-        public IEnumerable<MyDisk> ContainsaGivenSoftware(string swName)
-        {
-            return logic.ContainsaGivenSoftware(swName);
         }
 
         [HttpPost]

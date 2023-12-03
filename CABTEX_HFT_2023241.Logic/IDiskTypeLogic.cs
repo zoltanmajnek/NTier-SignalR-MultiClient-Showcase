@@ -10,5 +10,7 @@ namespace CABTEX_HFT_2023241.Logic
         DiskType Read(int id);
         IQueryable<DiskType> ReadAll();
         void Update(DiskType item);
+
+        public string LargestDiskVendorName();
     }
 }

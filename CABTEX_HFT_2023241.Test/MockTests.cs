@@ -119,7 +119,6 @@ namespace CABTEX_HFT_2023241.Test
             diskDirectoryLogic = new DiskDirectoryLogic(mockDiskDirectoryRepo.Object);
         }
 
-
         [Test]
         public void CreateDiskWithGoodLabel()
         {
@@ -194,6 +193,7 @@ namespace CABTEX_HFT_2023241.Test
         public void AvgException()
         {
             Assert.That(() => softwareLogic.AvgSizeInaGenre("Arcaade"), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => softwareLogic.Genre("NoSuchGenreShouldExists"), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

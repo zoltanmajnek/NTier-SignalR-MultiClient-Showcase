@@ -66,7 +66,7 @@ namespace CABTEX_HFT_2023241.Logic
 
         public IEnumerable<string> WhoLiveInMyStreet(string address)
         {
-            return ReadAll().Where(f=>f.Address.Contains(address)).Select(f=>f.Name);
+            return ReadAll().Where(f=>f.Address.ToUpper().Contains(address.ToUpper())).Select(f=>f.Name);
         }
     }
 }

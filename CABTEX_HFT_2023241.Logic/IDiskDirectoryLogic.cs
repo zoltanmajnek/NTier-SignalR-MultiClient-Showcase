@@ -10,5 +10,7 @@ namespace CABTEX_HFT_2023241.Logic
         DiskDirectory Read(int id);
         IQueryable<DiskDirectory> ReadAll();
         void Update(DiskDirectory item);
+
+        public int? DiskIdWithMaxSoftware();
     }
 }

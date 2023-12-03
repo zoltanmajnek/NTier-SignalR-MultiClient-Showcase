@@ -51,12 +51,14 @@ namespace CABTEX_HFT_2023241.Logic
 
         public IEnumerable<string> Genre(string genre)
         {
-            return ReadAll().Where(s => s.Genre == genre).Select(s => s.Name);
+            var genres = ReadAll().Where(s => s.Genre.ToUpper() == genre.ToUpper()).Select(s => s.Name);
+            if (!genres.Any()) throw new ArgumentException("No such genre");
+            return genres;
         }
 
         public double? AvgSizeInaGenre(string genre)
         {
-            var allInGen = ReadAll().Where(s => s.Genre == genre).Select(s => s.Size);
+            var allInGen = ReadAll().Where(s => s.Genre.ToUpper() == genre.ToUpper()).Select(s => s.Size);
             if (!allInGen.Any())
             {
                 if (genre=="*") allInGen = ReadAll().Select(s => s.Size);
