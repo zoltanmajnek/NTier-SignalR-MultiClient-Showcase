@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System;
+using System.Text.Json.Serialization;
 
 namespace CABTEX_HFT_2023241.Models
 {
@@ -21,6 +22,7 @@ namespace CABTEX_HFT_2023241.Models
         [StringLength(240)]
         public string Address { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<MyDisk> Disks { get; set; }
 
         public Friend()

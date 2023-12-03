@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CABTEX_HFT_2023241.Models
 {
@@ -16,7 +17,9 @@ namespace CABTEX_HFT_2023241.Models
         public string Genre { get; set; }
         public int Size { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<MyDisk> Disks { get; set; }
+
         public virtual ICollection<DiskDirectory> DiskDirectories { get; set; }
 
         public Software() { }

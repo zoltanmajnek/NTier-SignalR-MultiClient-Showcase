@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CABTEX_HFT_2023241.Models
 {
@@ -18,6 +19,7 @@ namespace CABTEX_HFT_2023241.Models
         [StringLength(20)]
         public string TypeName { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<MyDisk> Disks { get; set; }
 
         public DiskType(string line)
