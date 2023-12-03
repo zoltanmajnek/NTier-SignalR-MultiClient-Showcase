@@ -25,31 +25,32 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<Software> ReadAll()
         {
-            return this.logic.ReadAll();
+            return logic.ReadAll();
         }
 
-        [HttpGet("{id}")]
-        public Software Read(int id)
+        [HttpGet("{nameOrId}")]
+        public Software Read(string nameOrId)
         {
-            return this.logic.Read(id);
+            if (int.TryParse(nameOrId, out int id)) return logic.Read(id);
+            return logic.ReadByName(nameOrId);
         }
 
         [HttpPost]
         public void Create([FromBody] Software value)
         {
-            this.logic.Create(value);
+            logic.Create(value);
         }
 
         [HttpPut]
         public void Put([FromBody] Software value)
         {
-            this.logic.Update(value);
+            logic.Update(value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            this.logic.Delete(id);
+            logic.Delete(id);
         }
     }
 }

@@ -10,5 +10,7 @@ namespace CABTEX_HFT_2023241.Logic
         MyDisk Read(int id);
         IQueryable<MyDisk> ReadAll();
         void Update(MyDisk item);
+        int? FreeSpaceOnTheDisk(int id);
+        public IQueryable<MyDisk> ContainsaGivenSoftware(string swName);
     }
 }

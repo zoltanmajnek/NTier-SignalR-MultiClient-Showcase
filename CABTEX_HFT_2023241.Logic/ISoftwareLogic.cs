@@ -10,5 +10,6 @@ namespace CABTEX_HFT_2023241.Logic
         Software Read(int id);
         IQueryable<Software> ReadAll();
         void Update(Software item);
+        Software ReadByName(string name);
     }
 }

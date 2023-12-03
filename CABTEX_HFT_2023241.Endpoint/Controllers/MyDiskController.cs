@@ -11,7 +11,7 @@ using CABTEX_HFT_2023241.Models;
 
 namespace CABTEX_HFT_2023241.Endpoint.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class MyDiskController : ControllerBase
     {
@@ -25,31 +25,43 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<MyDisk> ReadAll()
         {
-            return this.logic.ReadAll();
+            return logic.ReadAll();
         }
 
         [HttpGet("{id}")]
         public MyDisk Read(int id)
         {
-            return this.logic.Read(id);
+            return logic.Read(id);
+        }
+
+        [HttpGet("{id}")]
+        public int? FreeSpace(int id)
+        {
+            return logic.FreeSpaceOnTheDisk(id);
+        }
+
+        [HttpGet("{swName}")]
+        public IEnumerable<MyDisk> ContainsaGivenSoftware(string swName)
+        {
+            return logic.ContainsaGivenSoftware(swName);
         }
 
         [HttpPost]
         public void Create([FromBody] MyDisk value)
         {
-            this.logic.Create(value);
+            logic.Create(value);
         }
 
         [HttpPut]
         public void Put([FromBody] MyDisk value)
         {
-            this.logic.Update(value);
+            logic.Update(value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            this.logic.Delete(id);
+            logic.Delete(id);
         }
     }
 }

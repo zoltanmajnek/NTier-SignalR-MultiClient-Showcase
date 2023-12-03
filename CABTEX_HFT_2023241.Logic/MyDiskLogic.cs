@@ -1,7 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -50,7 +49,7 @@ namespace CABTEX_HFT_2023241.Logic
             this.diskRepo.Update(item);
         }
 
-        public int FreeSpaceOnTheDisk(int id)
+        public int? FreeSpaceOnTheDisk(int id)
         {
             var disk = Read(id);
             int blocksFree = disk.DiskType.Capacity - disk.Softwares.Sum(s => s.Size);
@@ -58,7 +57,7 @@ namespace CABTEX_HFT_2023241.Logic
             return blocksFree;
         }
 
-        public IEnumerable<MyDisk> ContainsaGivenSoftware(string swName)
+        public IQueryable<MyDisk> ContainsaGivenSoftware(string swName)
         {
             swName = swName.ToUpper();
             Software software = swRepo.ReadAll().Where(s => s.Name.ToUpper().Equals(swName)).FirstOrDefault();

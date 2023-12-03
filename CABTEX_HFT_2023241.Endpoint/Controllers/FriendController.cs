@@ -11,7 +11,7 @@ using CABTEX_HFT_2023241.Models;
 
 namespace CABTEX_HFT_2023241.Endpoint.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class FriendController : ControllerBase
     {
@@ -25,31 +25,43 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         [HttpGet]
         public IEnumerable<Friend> ReadAll()
         {
-            return this.logic.ReadAll();
+            return logic.ReadAll();
         }
 
         [HttpGet("{id}")]
         public Friend Read(int id)
         {
-            return this.logic.Read(id);
+            return logic.Read(id);
+        }
+
+        [HttpGet]
+        public Friend WhoHasTheMostDisks()
+        {
+            return logic.WhoHasTheMostDisks();
+        }
+
+        [HttpGet("{swName}")]
+        public IEnumerable<Friend> WhoHasThisSoftware(string swName)
+        {
+            return logic.WhoHasThisSoftware(swName);
         }
 
         [HttpPost]
         public void Create([FromBody] Friend value)
         {
-            this.logic.Create(value);
+            logic.Create(value);
         }
 
         [HttpPut]
         public void Put([FromBody] Friend value)
         {
-            this.logic.Update(value);
+            logic.Update(value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            this.logic.Delete(id);
+            logic.Delete(id);
         }
     }
 }
