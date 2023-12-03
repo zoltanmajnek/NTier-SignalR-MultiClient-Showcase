@@ -8,29 +8,31 @@ namespace CABTEX_HFT_2023241.Logic
 {
     public class MyDiskLogic : IMyDiskLogic
     {
-        IRepository<MyDisk> repo;
+        IRepository<MyDisk> diskRepo;
+        IRepository<Software> swRepo;
 
-        public MyDiskLogic(IRepository<MyDisk> repo)
+        public MyDiskLogic(IRepository<MyDisk> diskRepo, IRepository<Software> swRepo)
         {
-            this.repo = repo;
+            this.diskRepo = diskRepo;
+            this.swRepo = swRepo;
         }
 
         public void Create(MyDisk disk)
         {
-            if (disk?.Label==null || disk.Label.Length<2)
+            if (disk?.Label == null || disk.Label.Length < 2)
                 throw new ArgumentException("Need a Label, at least 2 char long.");
 
-            this.repo.Create(disk);
+            this.diskRepo.Create(disk);
         }
 
         public void Delete(int id)
         {
-            this.repo.Delete(id);
+            this.diskRepo.Delete(id);
         }
 
         public MyDisk Read(int id)
         {
-            var disk = this.repo.Read(id);
+            var disk = this.diskRepo.Read(id);
             if (disk == null)
             {
                 throw new ArgumentException($"{id}. disk not exists");
@@ -40,12 +42,12 @@ namespace CABTEX_HFT_2023241.Logic
 
         public IQueryable<MyDisk> ReadAll()
         {
-            return this.repo.ReadAll();
+            return this.diskRepo.ReadAll();
         }
 
         public void Update(MyDisk item)
         {
-            this.repo.Update(item);
+            this.diskRepo.Update(item);
         }
 
         public int FreeSpaceOnTheDisk(int id)
@@ -56,9 +58,12 @@ namespace CABTEX_HFT_2023241.Logic
             return blocksFree;
         }
 
-        public IEnumerable<MyDisk> ContainsaGivenSoftware(string swName, SoftwareLogic sL)
+        public IEnumerable<MyDisk> ContainsaGivenSoftware(string swName)
         {
-            return ReadAll().Where(d => d.Softwares.Contains(sL.ReadByName(swName)));
+            swName = swName.ToUpper();
+            Software software = swRepo.ReadAll().Where(s => s.Name.ToUpper().Equals(swName)).FirstOrDefault();
+
+            return ReadAll().Where(d => d.Softwares.Contains(software));
         }
     }
 }

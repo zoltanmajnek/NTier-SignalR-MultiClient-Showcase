@@ -24,9 +24,9 @@ namespace CABTEX_HFT_2023241.Test
             Assert.That(sw, Is.Not.Null);
 
             var sl = new SoftwareLogic(sw);
-            var fl = new FriendLogic(f);
+            var fl = new FriendLogic(f,sw,MyD);
             var ddirl = new DiskDirectoryLogic(ddir);
-            var MyDl = new MyDiskLogic(MyD);
+            var MyDl = new MyDiskLogic(MyD,sw);
             var dtypel = new DiskTypeLogic(dtype);
 
             //First disk has 780 blocks total, has 3 software: 150+50+300, free space should be 780-500
@@ -36,11 +36,11 @@ namespace CABTEX_HFT_2023241.Test
 
             Assert.That(fl.WhoHasTheMostDisks().Name, Is.EqualTo("Én"));
 
-            var WhichDisksContainsHexmon = MyDl.ContainsaGivenSoftware("HexMon", sl);
+            var WhichDisksContainsHexmon = MyDl.ContainsaGivenSoftware("HexMon").ToList();
 
-            var WhoHasLastNinja = fl.WhoHasThisSoftware("Last Ninja", MyDl, sl);
-            var ThisShouldbeNull = fl.WhoHasThisSoftware("nothinghere", MyDl, sl);
-            var WhoHasHexmon = fl.WhoHasThisSoftware("hexmon", MyDl, sl).ToList();
+            var WhoHasLastNinja = fl.WhoHasThisSoftware("Last Ninja").ToList();
+            var ThisShouldbeNull = fl.WhoHasThisSoftware("nothinghere").ToList();;
+            var WhoHasHexmon = fl.WhoHasThisSoftware("hexmon").ToList();
             ;
 
         }

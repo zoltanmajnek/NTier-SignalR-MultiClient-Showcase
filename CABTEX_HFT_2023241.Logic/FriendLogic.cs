@@ -8,11 +8,15 @@ namespace CABTEX_HFT_2023241.Logic
 {
     public class FriendLogic : IFriendLogic
     {
-        IRepository<Friend> repo;
+        IRepository<Friend> friendRepo;
+        IRepository<Software> swRepo;
+        IRepository<MyDisk> diskRepo;
 
-        public FriendLogic(IRepository<Friend> repo)
+        public FriendLogic(IRepository<Friend> friendRepo, IRepository<Software> swRepo, IRepository<MyDisk> diskRepo)
         {
-            this.repo = repo;
+            this.friendRepo = friendRepo;
+            this.swRepo = swRepo;
+            this.diskRepo = diskRepo;
         }
 
         public void Create(Friend friend)
@@ -20,27 +24,27 @@ namespace CABTEX_HFT_2023241.Logic
             if (friend?.Name == null || friend.Name.Length < 2)
                 throw new ArgumentException("Need a Name, at least 2 char long.");
 
-            this.repo.Create(friend);
+            this.friendRepo.Create(friend);
         }
 
         public void Delete(int id)
         {
-            this.repo.Delete(id);
+            this.friendRepo.Delete(id);
         }
 
         public Friend Read(int id)
         {
-            return this.repo.Read(id);
+            return this.friendRepo.Read(id);
         }
 
         public IQueryable<Friend> ReadAll()
         {
-            return this.repo.ReadAll();
+            return this.friendRepo.ReadAll();
         }
 
         public void Update(Friend item)
         {
-            this.repo.Update(item);
+            this.friendRepo.Update(item);
         }
 
         public Friend WhoHasTheMostDisks()
@@ -50,9 +54,14 @@ namespace CABTEX_HFT_2023241.Logic
             return friends.First(f => f.Disks.Count == maxDisk);
         }
 
-        public IEnumerable<Friend> WhoHasThisSoftware(string swName, MyDiskLogic diskLogic, SoftwareLogic swLogic)
+        public IEnumerable<Friend> WhoHasThisSoftware(string swName)
         {
-            return diskLogic.ContainsaGivenSoftware(swName, swLogic).Select(d => d.Friend).Distinct();
+            //Először sw és disk logic paraméterben átadásával meghívtam kész logicokat,
+            //de csak a repokat ismerheti a logic, más logic-ot nem?
+            swName = swName.ToUpper();
+            var software = swRepo.ReadAll().Where(s => s.Name.ToUpper().Equals(swName)).FirstOrDefault();
+            var whichdisks = diskRepo.ReadAll().Where(d => d.Softwares.Contains(software));            
+            return whichdisks.Select(d => d.Friend).Distinct();
         }
     }
 }
