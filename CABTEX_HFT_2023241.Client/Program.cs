@@ -42,7 +42,7 @@ namespace CABTEX_HFT_2023241.Client
                 Console.WriteLine();
             }
 
-            Console.Write("Press Enter.");
+            Console.Write("Press Enter to continue.");
             Console.ReadLine();
         }
 
@@ -74,9 +74,24 @@ namespace CABTEX_HFT_2023241.Client
             catch (Exception) { Console.WriteLine("Unsuccessfull"); }
         }
 
+        static void ShowNonCrudData(string what)
+        {
+            List<string> items = rest.Get<string>("ALotOfNonCrudLogic/" + what);
+            foreach (var item in items) { Console.Write(" " + item); }
+        }
+
+        static string NonCrudSingleData(string what) => rest.GetSingle<string>("ALotOfNonCrudLogic/" + what);
+
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:53910/", "Software");
+            Console.WriteLine("Some nonCrud query: ");
+            Console.Write("Who lives in Szabadság utca?: "); ShowNonCrudData("WhoLiveInMyStreet/szab"); Console.WriteLine();
+            Console.WriteLine("Largest Disk VendorName: " + NonCrudSingleData("LargestDiskVendorName"));
+            Console.WriteLine("Free Space on disk 10: " + NonCrudSingleData("FreeSpace/10"));
+            Console.WriteLine("Average size of the RPG genre: " + NonCrudSingleData("AvgSizeInaGenre/rpg"));
+            Console.Write("Who has Last Ninja?: "); List<Friend>("ALotOfNonCrudLogic/WhoHasThisSoftware/last%20ninja");
+            //Console.Write("Etc :). Press Enter to continue to the CRUD menu!"); Console.ReadLine();
 
             var FriendSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List<Friend>("Friend"))
@@ -92,12 +107,12 @@ namespace CABTEX_HFT_2023241.Client
                 .Add("Update", () => Update<DiskType>("DiskType"))
                 .Add("Exit Types", ConsoleMenu.Close);
 
-            var DiskListSubMenu = new ConsoleMenu(args, level: 1)
+            var MyDiskSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List<MyDisk>("MyDisk"))
                 .Add("Create", () => Create("MyDisk"))
                 .Add("Delete", () => Delete("MyDisk"))
                 .Add("Update", () => Update<MyDisk>("MyDisk"))
-                .Add("Exit Disks", ConsoleMenu.Close);
+                .Add("Exit MyDisks", ConsoleMenu.Close);
 
             var SoftwareSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List<Software>("Software"))
@@ -110,7 +125,7 @@ namespace CABTEX_HFT_2023241.Client
                 .Add("Softwares", () => SoftwareSubMenu.Show())
                 .Add("Friends", () => FriendSubMenu.Show())
                 .Add("DiskTypes", () => DiskTypeSubMenu.Show())
-                .Add("DiskList", () => DiskListSubMenu.Show())
+                .Add("MyDisks", () => MyDiskSubMenu.Show())
                 .Add("Exit Client", ConsoleMenu.Close);
 
             menu.Show();
