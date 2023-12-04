@@ -26,7 +26,7 @@ namespace CABTEX_HFT_2023241.Test
         DiskTypeRepository diskTypeRepo;
 
         [SetUp]
-        public void Init() 
+        public void Init()
         {
             dbContext = new MyDisksDbContext();
             softwareRepo = new SoftwareRepository(dbContext);
@@ -43,13 +43,23 @@ namespace CABTEX_HFT_2023241.Test
         }
 
         [Test]
-        public void WhereAreMySoftwaresTest()
+        public void ReadExceptionsTest()
         {
-            Assert.That(() => myDiskLogic.Read(15), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => myDiskLogic.Read(150), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => friendLogic.Read(150), Throws.Nothing);
+            Assert.That(() => diskTypeLogic.Read(150), Throws.Nothing);
+        }
 
+        [Test]
+        public void SoftwareFinderOnDiskTest()
+        {
             var WhichDisksContainsHexmon = myDiskLogic.ContainsaGivenSoftware("HexMon").ToList();
             Assert.That(WhichDisksContainsHexmon.Count, Is.EqualTo(3));
+        }
 
+        [Test]
+        public void WhoBorrowedTheSoftwareTest()
+        {
             var WhoHasLastNinja = friendLogic.WhoHasThisSoftware("Last Ninja").ToList();
             Assert.That(WhoHasLastNinja.First().Name, Is.EqualTo("Gyuri"));
 
