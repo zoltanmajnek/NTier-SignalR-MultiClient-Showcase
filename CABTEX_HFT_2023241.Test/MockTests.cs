@@ -190,7 +190,7 @@ namespace CABTEX_HFT_2023241.Test
         }
 
         [Test]
-        public void AvgException()
+        public void GenreExceptions()
         {
             Assert.That(() => softwareLogic.AvgSizeInaGenre("Arcaade"), Throws.TypeOf<ArgumentException>());
             Assert.That(() => softwareLogic.Genre("NoSuchGenreShouldExists"), Throws.TypeOf<ArgumentException>());
