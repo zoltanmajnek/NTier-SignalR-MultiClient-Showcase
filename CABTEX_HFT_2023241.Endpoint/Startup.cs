@@ -23,19 +23,19 @@ namespace CABTEX_HFT_2023241.Endpoint
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<MyDisksDbContext>();
+            services.AddSingleton<MyDisksDbContext>();
 
-            services.AddTransient<IRepository<MyDisk>, MyDiskRepository>();
-            services.AddTransient<IRepository<DiskType>, DiskTypeRepository>();
-            services.AddTransient<IRepository<Software>, SoftwareRepository>();
-            services.AddTransient<IRepository<Friend>, FriendRepository>();
-            services.AddTransient<IRepository<DiskDirectory>, DiskDirectoryRepository>();
+            services.AddSingleton<IRepository<MyDisk>, MyDiskRepository>();
+            services.AddSingleton<IRepository<DiskType>, DiskTypeRepository>();
+            services.AddSingleton<IRepository<Software>, SoftwareRepository>();
+            services.AddSingleton<IRepository<Friend>, FriendRepository>();
+            services.AddSingleton<IRepository<DiskDirectory>, DiskDirectoryRepository>();
 
-            services.AddTransient<IMyDiskLogic, MyDiskLogic>();
-            services.AddTransient<IDiskTypeLogic, DiskTypeLogic>();
-            services.AddTransient<ISoftwareLogic, SoftwareLogic>();
-            services.AddTransient<IFriendLogic, FriendLogic>();
-            services.AddTransient<IDiskDirectoryLogic, DiskDirectoryLogic>();
+            services.AddSingleton<IMyDiskLogic, MyDiskLogic>();
+            services.AddSingleton<IDiskTypeLogic, DiskTypeLogic>();
+            services.AddSingleton<ISoftwareLogic, SoftwareLogic>();
+            services.AddSingleton<IFriendLogic, FriendLogic>();
+            services.AddSingleton<IDiskDirectoryLogic, DiskDirectoryLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
