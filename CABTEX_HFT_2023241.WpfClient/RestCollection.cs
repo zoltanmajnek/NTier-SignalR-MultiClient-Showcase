@@ -239,10 +239,7 @@ namespace CABTEX_HFT_2023241.WpfClient
     }
     public class RestExceptionInfo
     {
-        public RestExceptionInfo()
-        {
-
-        }
+        public RestExceptionInfo() { Msg = string.Empty; }
         public string Msg { get; set; }
     }
     class NotifyService
@@ -271,7 +268,6 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             await conn.StartAsync();
         }
-
     }
 
     public class RestCollection<T> : INotifyCollectionChanged, IEnumerable<T>
@@ -284,19 +280,19 @@ namespace CABTEX_HFT_2023241.WpfClient
         bool hasSignalR;
         Type type = typeof(T);
 
-        public RestCollection(string baseurl, string endpoint, string hub = null)
+        public RestCollection(string baseurl, string endpoint, string hub)
         {
             hasSignalR = hub != null;
             this.rest = new RestService(baseurl, endpoint);
             if (hub != null)
             {
                 this.notify = new NotifyService(baseurl + hub);
-                this.notify.AddHandler<T>(type.Name + "Created", (T item) =>
+                notify.AddHandler<T>(type.Name + "Created", (T item) =>
                 {
                     items.Add(item);
                     CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 });
-                this.notify.AddHandler<T>(type.Name + "Deleted", (T item) =>
+                notify.AddHandler<T>(type.Name + "Deleted", (T item) =>
                 {
                     var element = items.FirstOrDefault(t => t.Equals(item));
                     if (element != null)
@@ -310,12 +306,13 @@ namespace CABTEX_HFT_2023241.WpfClient
                     }
 
                 });
-                this.notify.AddHandler<T>(type.Name + "Updated", (T item) =>
+                notify.AddHandler<T>(type.Name + "Updated", (T item) =>
                 {
                     Init();
                 });
 
-                this.notify.Init();
+                notify.Init();
+
             }
             Init();
         }
@@ -348,11 +345,11 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             if (hasSignalR)
             {
-                this.rest.PostAsync(item, typeof(T).Name);
+                rest.PostAsync(item, typeof(T).Name);
             }
             else
             {
-                this.rest.PostAsync(item, typeof(T).Name).ContinueWith((t) =>
+                rest.PostAsync(item, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -370,11 +367,11 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             if (hasSignalR)
             {
-                this.rest.PutAsync(item, typeof(T).Name);
+                rest.PutAsync(item, typeof(T).Name);
             }
             else
             {
-                this.rest.PutAsync(item, typeof(T).Name).ContinueWith((t) =>
+                rest.PutAsync(item, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -391,11 +388,11 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             if (hasSignalR)
             {
-                this.rest.DeleteAsync(id, typeof(T).Name);
+                rest.DeleteAsync(id, typeof(T).Name);
             }
             else
             {
-                this.rest.DeleteAsync(id, typeof(T).Name).ContinueWith((t) =>
+                rest.DeleteAsync(id, typeof(T).Name).ContinueWith((t) =>
                 {
                     Init().ContinueWith(z =>
                     {
@@ -406,9 +403,6 @@ namespace CABTEX_HFT_2023241.WpfClient
                     });
                 });
             }
-
         }
-
-
     }
 }

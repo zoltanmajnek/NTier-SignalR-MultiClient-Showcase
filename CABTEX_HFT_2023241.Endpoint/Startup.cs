@@ -9,6 +9,7 @@ using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Diagnostics;
+using CABTEX_HFT_2023241.Endpoint.Services;
 
 namespace CABTEX_HFT_2023241.Endpoint
 {
@@ -37,6 +38,7 @@ namespace CABTEX_HFT_2023241.Endpoint
             services.AddSingleton<IFriendLogic, FriendLogic>();
             services.AddSingleton<IDiskDirectoryLogic, DiskDirectoryLogic>();
 
+            services.AddSignalR();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -70,6 +72,7 @@ namespace CABTEX_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

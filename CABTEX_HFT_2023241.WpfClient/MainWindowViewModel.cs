@@ -19,6 +19,9 @@ namespace CABTEX_HFT_2023241.WpfClient
         }
 
         public RestCollection<MyDisk> MyDisks { get; set; }
+        //public RestCollection<Friend> Friends { get; set; }
+        //public RestCollection<DiskType> Types { get; set; }
+        //public RestCollection<DiskDirectory> DiskDirectories { get; set; }
 
         private MyDisk selectedMyDisk;
 
@@ -40,7 +43,6 @@ namespace CABTEX_HFT_2023241.WpfClient
             }
         }
 
-
         public ICommand CreateMyDiskCommand { get; set; }
 
         public ICommand DeleteMyDiskCommand { get; set; }
@@ -56,12 +58,12 @@ namespace CABTEX_HFT_2023241.WpfClient
             }
         }
 
-
         public MainWindowViewModel()
         {
             if (!IsInDesignMode)
             {
                 MyDisks = new RestCollection<MyDisk>("http://localhost:53910/", "MyDisk", "hub");
+                //DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
                 CreateMyDiskCommand = new RelayCommand(() =>
                 {
                     MyDisks.Add(new MyDisk()
