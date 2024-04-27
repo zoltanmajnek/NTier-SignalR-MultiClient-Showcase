@@ -28,7 +28,6 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             var Window = new TypesWindow();
             Window.Show();
-
         }
 
         private void DirectoriesInfo(object sender, RoutedEventArgs e)
@@ -39,6 +38,13 @@ namespace CABTEX_HFT_2023241.WpfClient
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!(MessageBox.Show("Biztosan kilép?", "Megerősítés", MessageBoxButton.YesNo) == MessageBoxResult.Yes)) e.Cancel = true;
+        }
+
+        private void OpenSwWindow(object sender, RoutedEventArgs e)
+        {
+            var Window = new SwWindow();
+            Window.Show();
+
         }
     }
 }

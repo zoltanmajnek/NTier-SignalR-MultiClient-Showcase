@@ -22,10 +22,7 @@ namespace CABTEX_HFT_2023241.WpfClient
             {
                 if (e.Key < Key.NumPad0 || e.Key > Key.NumPad9)
                 {
-                    if (e.Key != Key.Back)
-                    {
-                        e.Handled = true;
-                    }
+                    if (e.Key != Key.Back) e.Handled = true;
                 }
             }
         }

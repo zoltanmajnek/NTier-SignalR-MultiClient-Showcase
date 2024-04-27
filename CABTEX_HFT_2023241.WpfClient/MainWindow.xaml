@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CABTEX_HFT_2023241.WpfClient"
         mc:Ignorable="d"
-        Title="CABTEX WpfClient" Height="300" Width="200" WindowStartupLocation="CenterScreen">
+        Title="CABTEX WpfClient" Height="300" Width="200" WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -18,7 +19,7 @@
                     <Button Content="Disks" Height="28" Width="140" Click="OpenMyDisks"/>
                     <Button Content="Friends" Height="28" Width="140" Click="OpenFriends"/>
                     <Button Content="Types" Height="28" Width="140" Click="OpenDiskTypeWindow"/>
-                    <Button Content="Software" Height="28" Width="140" Click="OpenMyDisks"/>
+                    <Button Content="Software" Height="28" Width="140" Click="OpenSwWindow"/>
                     <Button Content="Directories" Height="28" Width="140" Click="DirectoriesInfo"/>
                     <Button Content="NonCruds" Height="28" Width="140" Click="OpenMyDisks"/>
                 </StackPanel>
