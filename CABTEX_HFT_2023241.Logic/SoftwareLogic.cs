@@ -52,7 +52,7 @@ namespace CABTEX_HFT_2023241.Logic
         public IEnumerable<string> Genre(string genre)
         {
             var genres = ReadAll().Where(s => s.Genre.ToUpper() == genre.ToUpper()).Select(s => s.Name);
-            if (!genres.Any()) throw new ArgumentException("No such genre");
+            //if (!genres.Any()) throw new ArgumentException("No such genre");
             return genres;
         }
 

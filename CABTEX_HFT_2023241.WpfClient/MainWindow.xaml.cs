@@ -44,7 +44,12 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             var Window = new SwWindow();
             Window.Show();
+        }
 
+        private void OpenNonCrudWindow(object sender, RoutedEventArgs e)
+        {
+            var Window = new NonCrudWindow();
+            Window.Show();
         }
     }
 }

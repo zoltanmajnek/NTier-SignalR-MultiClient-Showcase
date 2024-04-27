@@ -21,7 +21,7 @@
                     <Button Content="Types" Height="28" Width="140" Click="OpenDiskTypeWindow"/>
                     <Button Content="Software" Height="28" Width="140" Click="OpenSwWindow"/>
                     <Button Content="Directories" Height="28" Width="140" Click="DirectoriesInfo"/>
-                    <Button Content="NonCruds" Height="28" Width="140" Click="OpenMyDisks"/>
+                    <Button Content="NonCruds" Height="28" Width="140" Click="OpenNonCrudWindow"/>
                 </StackPanel>
             </ContentControl>
     </Grid>

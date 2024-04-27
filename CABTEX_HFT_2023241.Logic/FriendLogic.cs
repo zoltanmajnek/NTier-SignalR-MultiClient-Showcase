@@ -67,8 +67,8 @@ namespace CABTEX_HFT_2023241.Logic
 
         public IEnumerable<string> WhoLiveInMyStreet(string address)
         {
-            if (address.IsNullOrEmpty() || address=="*") return ReadAll().Select(f=>f.Name+": "+f.Address);
-            return ReadAll().Where(f=>f.Address.ToUpper().Contains(address.ToUpper())).Select(f=>f.Name+": "+f.Address);
+            if (address.IsNullOrEmpty() || address=="*") return ReadAll().Select(f=>$"Neve: {f.Name}. Címe: {f.Address}");
+            return ReadAll().Where(f=>f.Address.ToUpper().Contains(address.ToUpper())).Select(f=>$"Name: {f.Name}. Címe: {f.Address}");
         }
     }
 }
