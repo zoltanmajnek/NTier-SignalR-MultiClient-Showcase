@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace CABTEX_HFT_2023241.WpfClient
 {
@@ -10,6 +11,19 @@ namespace CABTEX_HFT_2023241.WpfClient
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OpenMyDisks(object sender, RoutedEventArgs e)
+        {
+            var DiskWindow = new MyDisks();
+            DiskWindow.Show();
+        }
+
+        private void OpenFriends(object sender, RoutedEventArgs e)
+        {
+            var FriendWindow = new Friends();
+            FriendWindow.Show();
+
         }
     }
 }

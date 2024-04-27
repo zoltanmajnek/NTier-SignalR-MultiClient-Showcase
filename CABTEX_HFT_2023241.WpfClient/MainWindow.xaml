@@ -5,30 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CABTEX_HFT_2023241.WpfClient"
         mc:Ignorable="d"
-        Title="CABTEX WpfClient" Height="450" Width="800">
-    <Window.DataContext>
-        <local:MainWindowViewModel />
-    </Window.DataContext>
-
+        Title="CABTEX WpfClient" Height="300" Width="200">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding MyDisks}" SelectedItem="{Binding SelectedMyDisk}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Label Content="{Binding Label}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Grid.Column="1">
-            <Label Content="Name" Background="LightBlue" Padding="10" />
-            <TextBox Text="{Binding SelectedMyDisk.Label}" Padding="10" Margin="0,0,0,30" />
-            <Button Content="Create MyDisk" Command="{Binding CreateMyDiskCommand}" Margin="10" Padding="10" />
-            <Button Content="Delete MyDisk" Command="{Binding DeleteMyDiskCommand}" Margin="10" Padding="10" />
-            <Button Content="Update MyDisk" Command="{Binding UpdateMyDiskCommand}" Margin="10" Padding="10" />
-            <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Katalógus Main Menu"></Label>
+            <ContentControl Grid.Row="1" FontSize="20" FontWeight="Normal"   >
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" >
+                    <Label FontSize="20" Grid.Row="1" Content="Select a Table" HorizontalAlignment="Center"></Label>
+                    <Button Content="Disks" Height="28" Width="140" Click="OpenMyDisks"/>
+                    <Button Content="Friends" Height="28" Width="140" Click="OpenFriends"/>
+                    <Button Content="Types" Height="28" Width="140" Click="OpenMyDisks"/>
+                    <Button Content="Software" Height="28" Width="140" Click="OpenMyDisks"/>
+                    <Button Content="Directories" Height="28" Width="140" Click="OpenMyDisks"/>
+                    <Button Content="NonCruds" Height="28" Width="140" Click="OpenMyDisks"/>
+                </StackPanel>
+            </ContentControl>
     </Grid>
 </Window>

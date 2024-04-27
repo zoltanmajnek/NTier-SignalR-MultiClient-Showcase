@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace CABTEX_HFT_2023241.WpfClient
 {
-    public class MainWindowViewModel : ObservableRecipient
+    public class FriendsViewModel : ObservableRecipient
     {
         private string errorMessage;
 
@@ -18,36 +18,35 @@ namespace CABTEX_HFT_2023241.WpfClient
             set { SetProperty(ref errorMessage, value); }
         }
 
-        public RestCollection<MyDisk> MyDisks { get; set; }
-        //public RestCollection<Friend> Friends { get; set; }
+        public RestCollection<Friend> Friends { get; set; }
         //public RestCollection<DiskType> Types { get; set; }
         //public RestCollection<DiskDirectory> DiskDirectories { get; set; }
 
-        private MyDisk selectedMyDisk;
+        private Friend selectedFriend;
 
-        public MyDisk SelectedMyDisk
+        public Friend SelectedFriend
         {
-            get { return selectedMyDisk; }
+            get { return selectedFriend; }
             set
             {
                 if (value != null)
                 {
-                    selectedMyDisk = new MyDisk()
+                    selectedFriend = new Friend()
                     {
-                        Label = value.Label,
+                        Name = value.Name,
                         Id = value.Id
                     };
                     OnPropertyChanged();
-                    (DeleteMyDiskCommand as RelayCommand).NotifyCanExecuteChanged();
+                    (DeleteFriendCommand as RelayCommand).NotifyCanExecuteChanged();
                 }
             }
         }
 
-        public ICommand CreateMyDiskCommand { get; set; }
+        public ICommand CreateFriendCommand { get; set; }
 
-        public ICommand DeleteMyDiskCommand { get; set; }
+        public ICommand DeleteFriendCommand { get; set; }
 
-        public ICommand UpdateMyDiskCommand { get; set; }
+        public ICommand UpdateFriendCommand { get; set; }
 
         public static bool IsInDesignMode
         {
@@ -58,25 +57,25 @@ namespace CABTEX_HFT_2023241.WpfClient
             }
         }
 
-        public MainWindowViewModel()
+        public FriendsViewModel()
         {
             if (!IsInDesignMode)
             {
-                MyDisks = new RestCollection<MyDisk>("http://localhost:53910/", "MyDisk", "hub");
+                Friends = new RestCollection<Friend>("http://localhost:53910/", "Friend", "hub");
                 //DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
-                CreateMyDiskCommand = new RelayCommand(() =>
+                CreateFriendCommand = new RelayCommand(() =>
                 {
-                    MyDisks.Add(new MyDisk()
+                    Friends.Add(new Friend()
                     {
-                        Label = SelectedMyDisk.Label,
+                        Name = SelectedFriend.Name,
                     });
                 });
 
-                UpdateMyDiskCommand = new RelayCommand(() =>
+                UpdateFriendCommand = new RelayCommand(() =>
                 {
                     try
                     {
-                        MyDisks.Update(SelectedMyDisk);
+                        Friends.Update(SelectedFriend);
                     }
                     catch (ArgumentException ex)
                     {
@@ -85,17 +84,16 @@ namespace CABTEX_HFT_2023241.WpfClient
 
                 });
 
-                DeleteMyDiskCommand = new RelayCommand(() =>
+                DeleteFriendCommand = new RelayCommand(() =>
                 {
-                    MyDisks.Delete(SelectedMyDisk.Id);
+                    Friends.Delete(SelectedFriend.Id);
                 },
                 () =>
                 {
-                    return SelectedMyDisk != null;
+                    return SelectedFriend != null;
                 });
-                SelectedMyDisk = new MyDisk();
+                SelectedFriend = new Friend();
             }
-
         }
     }
 }
