@@ -34,7 +34,9 @@ namespace CABTEX_HFT_2023241.WpfClient
                     selectedFriend = new Friend()
                     {
                         Name = value.Name,
-                        Id = value.Id
+                        Id = value.Id,
+                        PhoneNumber = value.PhoneNumber,
+                        Address = value.Address,
                     };
                     OnPropertyChanged();
                     (DeleteFriendCommand as RelayCommand).NotifyCanExecuteChanged();
@@ -69,6 +71,8 @@ namespace CABTEX_HFT_2023241.WpfClient
                     Friends.Add(new Friend()
                     {
                         Name = SelectedFriend.Name,
+                        PhoneNumber= SelectedFriend.PhoneNumber,
+                        Address = SelectedFriend.Address,
                     });
                 });
 

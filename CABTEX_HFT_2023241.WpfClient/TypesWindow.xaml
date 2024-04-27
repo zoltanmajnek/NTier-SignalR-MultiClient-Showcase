@@ -1,0 +1,38 @@
+﻿<Window x:Class="CABTEX_HFT_2023241.WpfClient.TypesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CABTEX_HFT_2023241.WpfClient"
+        mc:Ignorable="d"
+        Title="Disk Types" Height="450" Width="800">
+    <Window.DataContext>
+        <local:TypesWindowViewModel />
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox ItemsSource="{Binding DiskTypes}" SelectedItem="{Binding SelectedDiskType}" SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Label Content="{Binding TypeName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Column="1">
+            <Label Content="TypeName" Background="LightBlue" Padding="10" />
+            <TextBox Text="{Binding SelectedDiskType.TypeName, Mode=TwoWay}" Padding="10" Margin="0,0,0,0" />
+            <Label Content="VendorName" Background="LightBlue" Padding="10" />
+            <TextBox Text="{Binding SelectedDiskType.VendorName, Mode=TwoWay}" Padding="10" Margin="0,0,0,0" />
+            <Label Content="Capacity" Background="LightBlue" Padding="10" />
+            <TextBox Text="{Binding SelectedDiskType.Capacity, Mode=TwoWay}" PreviewKeyDown="TextBox_PreviewKeyDown" Padding="10" Margin="0,0,0,0" />
+            <Button Content="Create DiskType" Command="{Binding CreateDiskTypeCommand}" Margin="10" Padding="10" />
+            <Button Content="Delete DiskType" Command="{Binding DeleteDiskTypeCommand}" Margin="10" Padding="10" />
+            <Button Content="Update DiskType" Command="{Binding UpdateDiskTypeCommand}" Margin="10" Padding="10" />
+            <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,5 +1,6 @@
 ﻿using CABTEX_HFT_2023241.Models;
 using CABTEX_HFT_2023241.Repository;
+using Castle.Core.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,7 +67,8 @@ namespace CABTEX_HFT_2023241.Logic
 
         public IEnumerable<string> WhoLiveInMyStreet(string address)
         {
-            return ReadAll().Where(f=>f.Address.ToUpper().Contains(address.ToUpper())).Select(f=>f.Name);
+            if (address.IsNullOrEmpty() || address=="*") return ReadAll().Select(f=>f.Name+": "+f.Address);
+            return ReadAll().Where(f=>f.Address.ToUpper().Contains(address.ToUpper())).Select(f=>f.Name+": "+f.Address);
         }
     }
 }
