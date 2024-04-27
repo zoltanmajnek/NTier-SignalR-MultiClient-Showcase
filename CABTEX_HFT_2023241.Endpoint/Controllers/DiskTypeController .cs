@@ -1,6 +1,8 @@
-﻿using CABTEX_HFT_2023241.Logic;
+﻿using CABTEX_HFT_2023241.Endpoint.Services;
+using CABTEX_HFT_2023241.Logic;
 using CABTEX_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 
 
@@ -13,10 +15,12 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
     public class DiskTypeController : ControllerBase
     {
         IDiskTypeLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public DiskTypeController(IDiskTypeLogic logic)
+        public DiskTypeController(IDiskTypeLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -35,18 +39,22 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] DiskType value)
         {
             this.logic.Create(value);
+            hub.Clients.All.SendAsync("DiskTypeCreated", value);
         }
 
         [HttpPut]
         public void Put([FromBody] DiskType value)
         {
             this.logic.Update(value);
+            hub.Clients.All.SendAsync("DiskTypeUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            this.logic.Delete(id);
+            var DiskTypeToDelete = logic.Read(id);
+            logic.Delete(id);
+            hub.Clients.All.SendAsync("DiskTypeDeleted", DiskTypeToDelete);
         }
     }
 }

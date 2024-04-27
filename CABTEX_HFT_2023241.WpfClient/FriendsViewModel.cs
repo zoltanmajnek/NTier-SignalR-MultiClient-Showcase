@@ -62,6 +62,7 @@ namespace CABTEX_HFT_2023241.WpfClient
             if (!IsInDesignMode)
             {
                 Friends = new RestCollection<Friend>("http://localhost:53910/", "Friend", "hub");
+                
                 //DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
                 CreateFriendCommand = new RelayCommand(() =>
                 {

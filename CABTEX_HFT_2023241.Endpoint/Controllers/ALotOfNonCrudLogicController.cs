@@ -1,6 +1,8 @@
-﻿using CABTEX_HFT_2023241.Logic;
+﻿using CABTEX_HFT_2023241.Endpoint.Services;
+using CABTEX_HFT_2023241.Logic;
 using CABTEX_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +21,16 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         IDiskDirectoryLogic directoryLogic;
         IDiskTypeLogic diskTypelogic;
         ISoftwareLogic softwareLogic;
+        IHubContext<SignalRHub> hub;
 
-        public ALotOfNonCrudLogicController(IFriendLogic friendLogic, IMyDiskLogic diskLogic, IDiskDirectoryLogic directoryLogic, IDiskTypeLogic diskTypelogic, ISoftwareLogic softwareLogic)
+        public ALotOfNonCrudLogicController(IFriendLogic friendLogic, IMyDiskLogic diskLogic, IDiskDirectoryLogic directoryLogic, IDiskTypeLogic diskTypelogic, ISoftwareLogic softwareLogic, IHubContext<SignalRHub> hub)
         {
             this.friendLogic = friendLogic;
             this.diskLogic = diskLogic;
             this.directoryLogic = directoryLogic;
             this.diskTypelogic = diskTypelogic;
             this.softwareLogic = softwareLogic;
+            this.hub = hub;
         }
 
         [HttpGet("{address}")]

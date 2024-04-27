@@ -1,6 +1,8 @@
-﻿using CABTEX_HFT_2023241.Logic;
+﻿using CABTEX_HFT_2023241.Endpoint.Services;
+using CABTEX_HFT_2023241.Logic;
 using CABTEX_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
 
 
@@ -13,10 +15,12 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
     public class SoftwareController : ControllerBase
     {
         ISoftwareLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public SoftwareController(ISoftwareLogic logic)
+        public SoftwareController(ISoftwareLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -36,18 +40,22 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] Software value)
         {
             logic.Create(value);
+            hub.Clients.All.SendAsync("SoftwareCreated", value);
         }
 
         [HttpPut]
         public void Put([FromBody] Software value)
         {
             logic.Update(value);
+            hub.Clients.All.SendAsync("SoftwareUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var SoftwareToDelete = logic.Read(id);
             logic.Delete(id);
+            hub.Clients.All.SendAsync("SoftwareDeleted", SoftwareToDelete);
         }
     }
 }

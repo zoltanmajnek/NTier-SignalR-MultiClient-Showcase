@@ -2,7 +2,10 @@
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,15 +22,36 @@ namespace CABTEX_HFT_2023241.WpfClient
         }
 
         public RestCollection<MyDisk> MyDisks { get; set; }
+        public RestCollection<Software> Softwares { get; set; }
+        public RestCollection<DiskDirectory> DiskDirectories { get; set; }
+
         //public RestCollection<Friend> Friends { get; set; }
         //public RestCollection<DiskType> Types { get; set; }
-        //public RestCollection<DiskDirectory> DiskDirectories { get; set; }
+
 
         private MyDisk selectedMyDisk;
+        private ObservableCollection<Software> containedSoftwares;
+
+        public ObservableCollection<Software> ContainedSoftwares
+        {
+            get { return containedSoftwares; }
+        }
 
         public MyDisk SelectedMyDisk
         {
-            get { return selectedMyDisk; }
+            get
+            {
+                var dir = DiskDirectories.Where(d => d.DiskId == selectedMyDisk.Id).ToList();
+                containedSoftwares.Clear();
+
+                foreach (var item in dir)
+                {
+                    var sw = Softwares.FirstOrDefault(x => x.Id == item.SoftwareId);
+                    if (sw != null) containedSoftwares.Add(sw);
+                }
+
+                return selectedMyDisk;
+            }
             set
             {
                 if (value != null)
@@ -63,7 +87,8 @@ namespace CABTEX_HFT_2023241.WpfClient
             if (!IsInDesignMode)
             {
                 MyDisks = new RestCollection<MyDisk>("http://localhost:53910/", "MyDisk", "hub");
-                //DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
+                Softwares = new RestCollection<Software>("http://localhost:53910/", "Software", "hub");
+                DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
                 CreateMyDiskCommand = new RelayCommand(() =>
                 {
                     MyDisks.Add(new MyDisk()
@@ -94,6 +119,7 @@ namespace CABTEX_HFT_2023241.WpfClient
                     return SelectedMyDisk != null;
                 });
                 SelectedMyDisk = new MyDisk();
+                containedSoftwares = new ObservableCollection<Software>();
             }
         }
     }

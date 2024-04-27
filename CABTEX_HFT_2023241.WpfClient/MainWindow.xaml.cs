@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 
 namespace CABTEX_HFT_2023241.WpfClient
 {

@@ -13,7 +13,7 @@
         </Grid.RowDefinitions>
         <Label Content="Katalógus Main Menu"></Label>
             <ContentControl Grid.Row="1" FontSize="20" FontWeight="Normal"   >
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" >
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Label FontSize="20" Grid.Row="1" Content="Select a Table" HorizontalAlignment="Center"></Label>
                     <Button Content="Disks" Height="28" Width="140" Click="OpenMyDisks"/>
                     <Button Content="Friends" Height="28" Width="140" Click="OpenFriends"/>
