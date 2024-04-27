@@ -1,10 +1,9 @@
-﻿using CABTEX_HFT_2023241.Logic;
+﻿using CABTEX_HFT_2023241.Endpoint.Services;
+using CABTEX_HFT_2023241.Logic;
 using CABTEX_HFT_2023241.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CABTEX_HFT_2023241.Endpoint.Controllers
 {
@@ -13,10 +12,12 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
     public class FriendController : ControllerBase
     {
         IFriendLogic logic;
+        IHubContext<SignalRHub> hub;
 
-        public FriendController(IFriendLogic logic)
+        public FriendController(IFriendLogic logic, IHubContext<SignalRHub> hub)
         {
             this.logic = logic;
+            this.hub = hub;
         }
 
         [HttpGet]
@@ -35,18 +36,22 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
         public void Create([FromBody] Friend value)
         {
             logic.Create(value);
+            hub.Clients.All.SendAsync("FriendCreated", value);
         }
 
         [HttpPut]
         public void Put([FromBody] Friend value)
         {
             logic.Update(value);
+            hub.Clients.All.SendAsync("FriendUpdated", value);
         }
 
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var FriendToDelete = logic.Read(id);
             logic.Delete(id);
+            hub.Clients.All.SendAsync("FriendDeleted", FriendToDelete);
         }
     }
 }

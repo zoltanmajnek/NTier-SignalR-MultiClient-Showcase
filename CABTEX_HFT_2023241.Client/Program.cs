@@ -84,7 +84,8 @@ namespace CABTEX_HFT_2023241.Client
 
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:53910/", "Software");
+            Console.Write("Press Enter soon : )"); Console.ReadLine();
+            rest = new RestService("http://localhost:53910/", "Software");            
             Console.WriteLine("Some nonCrud query: ");
             Console.Write("Who lives in Szabadság utca?: "); ShowNonCrudData("WhoLiveInMyStreet/szab"); Console.WriteLine();
             Console.WriteLine("Largest Disk VendorName: " + NonCrudSingleData("LargestDiskVendorName"));
