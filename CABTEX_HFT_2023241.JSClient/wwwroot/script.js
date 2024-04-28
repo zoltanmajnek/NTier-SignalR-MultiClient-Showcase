@@ -51,10 +51,10 @@ function display() {
     document.getElementById('resultarea').innerHTML = "";
     mydisks.forEach(t => {
         document.getElementById('resultarea').innerHTML +=
-            "<tr><td>" + t.id + "</td><td>"
-            + t.label + "</td><td>"
+            "<tr><td style=\"width:5%\">" + t.id + "</td><td>"
+            + t.label + "</td><td style=\"width:30%\">"
             + `<button type="button" onclick="select(${t.id})">Select</button> `
-            + `<button type="button" onclick="directory(${t.id})">Directory</button> `
+        + `<button type="button" onclick="directory(${t.id})">Directory</button> `
             + `<button type="button" onclick="remove(${t.id})">Delete</button>`
             + "</td></tr>";
     });
@@ -97,22 +97,21 @@ function create() {
 }
 
 function directory(id) {
-    select(id);
     document.getElementById('resultarea').innerHTML = "";
     mydisks.forEach(t => {
-        let dirFunc = "directory("+t.id+")";
+        let dirFunc = "directory(" + t.id + ")";
         let funcName = "Directory"
         let currLabel = t.label;
         if (t.id == id) {
             funcName = "Close Dir";
             dirFunc = "display()";
             t.softwares.forEach(sw => {
-                currLabel += "<br/>  " + sw.name + "-" + sw.genre + "-" + sw.creator;
+                currLabel += "<br/> &emsp;" + sw.name + "-" + sw.genre + "-" + sw.creator;
             });
         }
         document.getElementById('resultarea').innerHTML +=
-            "<tr><td>" + t.id + "</td><td>"
-            + currLabel + "</td><td>"
+            "<tr><td style=\"width:5%\">" + t.id + "</td><td>"
+            + currLabel + "</td><td style=\"width:30%\">"
             + `<button type="button" onclick="select(${t.id})">Select</button> `
             + `<button type="button" onclick="${dirFunc}">${funcName}</button> `
             + `<button type="button" onclick="remove(${t.id})">Delete</button>`
