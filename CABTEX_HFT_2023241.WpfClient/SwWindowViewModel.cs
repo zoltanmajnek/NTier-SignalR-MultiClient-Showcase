@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,6 +20,7 @@ namespace CABTEX_HFT_2023241.WpfClient
         }
 
         public RestCollection<Software> Softwares { get; set; }
+        public RestCollection<MyDisk> MyDisks { get; set; }
         //public RestCollection<DiskType> Types { get; set; }
         //public RestCollection<DiskDirectory> DiskDirectories { get; set; }
 
@@ -65,6 +67,7 @@ namespace CABTEX_HFT_2023241.WpfClient
             if (!IsInDesignMode)
             {
                 Softwares = new RestCollection<Software>("http://localhost:53910/", "Software", "hub");
+                MyDisks = new RestCollection<MyDisk>("http://localhost:53910/", "MyDisk", "hub");
 
                 //DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
                 CreateSoftwareCommand = new RelayCommand(() =>
@@ -89,6 +92,16 @@ namespace CABTEX_HFT_2023241.WpfClient
                         ErrorMessage = ex.Message;
                     }
 
+                    
+                    try
+                    {
+                        var sendMsgToDiskWindow = MyDisks.First();
+                        MyDisks.Update(sendMsgToDiskWindow);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        ErrorMessage = ex.Message;
+                    }
                 });
 
                 DeleteSoftwareCommand = new RelayCommand(() =>
@@ -99,6 +112,7 @@ namespace CABTEX_HFT_2023241.WpfClient
                 {
                     return SelectedSoftware != null;
                 });
+
                 SelectedSoftware = new Software();
             }
         }
