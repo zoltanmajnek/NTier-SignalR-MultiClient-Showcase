@@ -1,5 +1,8 @@
 ﻿let mydisks = [];
 let connection = null;
+let opendirs = [];
+let selectedId = -1;
+document.getElementById('updateButton').style.visibility = 'hidden';
 getdata();
 setupSignalR();
 
@@ -59,19 +62,45 @@ async function getSwdata() {
 function display() {
     document.getElementById('resultarea').innerHTML = "";
     mydisks.forEach(t => {
+        let dirFunc = "directoryOpen(" + t.id + ")";
+        let funcName = "Directory"
+        let currLabel = t.label;
+        let selectString = "Select"
+        if (selectedId == t.id) {
+            selectString = "Unselect";
+            currLabel = "<p style=\"color:red;\">"+currLabel+"</p>";
+        }
+        if (opendirs.includes(t.id) && t.softwares != null) {
+            funcName = "Close Dir";
+            dirFunc = "directoryClose(" + t.id + ")";
+            t.softwares.forEach(sw => {
+                currLabel += "<br/> &emsp;" + sw.name + "-" + sw.genre + "-" + sw.creator;
+            });
+        }
         document.getElementById('resultarea').innerHTML +=
             "<tr><td style=\"width:5%\">" + t.id + "</td><td>"
-            + t.label + "</td><td style=\"width:30%\">"
-            + `<button type="button" onclick="select(${t.id})">Select</button> `
-            + `<button type="button" onclick="directory(${t.id})">Directory</button> `
+            + currLabel + "</td><td style=\"width:30%\">"
+            + `<button type="button" onclick="select(${t.id})">${selectString}</button > `
+            + `<button type="button" onclick="${dirFunc}">${funcName}</button> `
             + `<button type="button" onclick="remove(${t.id})">Delete</button>`
             + "</td></tr>";
     });
 }
 function select(id) {
-    let selected = mydisks.find(x => x.id == id);
-    document.getElementById('diskLabel').value = selected.label;
-    document.getElementById('dMessage').innerHTML = "Nála van:" + selected.friend.name;
+    if (selectedId != id) {
+        let selected = mydisks.find(x => x.id == id);
+        selectedId = id;
+        document.getElementById('updateButton').style.visibility = 'visible';
+        document.getElementById('diskLabel').value = selected.label;
+        if (selected.friend != null) {
+            document.getElementById('dMessage').innerHTML = "Nála van:" + selected.friend.name;
+        }
+    } else {
+        selectedId = -1;
+        document.getElementById('updateButton').style.visibility = 'hidden';
+        document.getElementById('dMessage').innerHTML = "";
+    }
+    display();
 }
 
 function remove(id) {
@@ -105,25 +134,28 @@ function create() {
         .catch((error) => { console.error('Error:', error); });
 }
 
-function directory(id) {
-    document.getElementById('resultarea').innerHTML = "";
-    mydisks.forEach(t => {
-        let dirFunc = "directory(" + t.id + ")";
-        let funcName = "Directory"
-        let currLabel = t.label;
-        if (t.id == id) {
-            funcName = "Close Dir";
-            dirFunc = "display()";
-            t.softwares.forEach(sw => {
-                currLabel += "<br/> &emsp;" + sw.name + "-" + sw.genre + "-" + sw.creator;
-            });
-        }
-        document.getElementById('resultarea').innerHTML +=
-            "<tr><td style=\"width:5%\">" + t.id + "</td><td>"
-            + currLabel + "</td><td style=\"width:30%\">"
-            + `<button type="button" onclick="select(${t.id})">Select</button> `
-            + `<button type="button" onclick="${dirFunc}">${funcName}</button> `
-            + `<button type="button" onclick="remove(${t.id})">Delete</button>`
-            + "</td></tr>";
-    });
+function update() {
+    let dLabel = document.getElementById('diskLabel').value;
+    fetch('http://localhost:53910/mydisk', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { Label: dLabel, Id: selectedId })
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+}
+
+function directoryOpen(id) {
+    opendirs.push(id);
+    display();
+}
+function directoryClose(id) {
+    opendirs.push(id);
+    opendirs = opendirs.filter(x => x != id);
+    display();
 }
