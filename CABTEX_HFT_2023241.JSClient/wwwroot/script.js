@@ -46,6 +46,15 @@ async function getdata() {
             display();
         });
 }
+async function getSwdata() {
+    await fetch('http://localhost:53910/software')
+        .then(x => x.json())
+        .then(y => {
+            softwares = y;
+            //console.log(mydisks);
+            display();
+        });
+}
 
 function display() {
     document.getElementById('resultarea').innerHTML = "";
@@ -54,7 +63,7 @@ function display() {
             "<tr><td style=\"width:5%\">" + t.id + "</td><td>"
             + t.label + "</td><td style=\"width:30%\">"
             + `<button type="button" onclick="select(${t.id})">Select</button> `
-        + `<button type="button" onclick="directory(${t.id})">Directory</button> `
+            + `<button type="button" onclick="directory(${t.id})">Directory</button> `
             + `<button type="button" onclick="remove(${t.id})">Delete</button>`
             + "</td></tr>";
     });
