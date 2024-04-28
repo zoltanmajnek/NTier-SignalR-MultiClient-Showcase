@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CABTEX UI</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Friends List</h1>
+    <div id="formdiv">
+        <label>Friend Data: </label>
+        <input type="text" id="friendName" />
+        <input type="text" id="friendAddress" />
+        <input type="text" id="friendPhone" />
+        <button type="button" onclick="create()">Create New</button>
+        <button type="button" id="updateButton" onclick="update()">Update</button>
+        <a href="index.html">Disk List</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Friends</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="friends.js"></script>
+</body>
+</html>
