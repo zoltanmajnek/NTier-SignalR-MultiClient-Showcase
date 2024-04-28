@@ -112,7 +112,7 @@ namespace CABTEX_HFT_2023241.Test
             mockDiskDirectoryRepo.Setup(m => m.ReadAll()).Returns(directories.AsQueryable());
             mockDiskDirectoryRepo.Setup(m => m.Read(It.IsAny<int>())).Returns((int id) => directories[id - 1]);
 
-            diskLogic = new MyDiskLogic(mockMyDiskRepo.Object, mockSoftwareRepo.Object);
+            diskLogic = new MyDiskLogic(mockMyDiskRepo.Object, mockSoftwareRepo.Object, mockDiskDirectoryRepo.Object);
             diskTypeLogic = new DiskTypeLogic(mockDiskTypeRepo.Object);
             friendLogic = new FriendLogic(mockFriendRepo.Object, mockSoftwareRepo.Object, mockMyDiskRepo.Object);
             softwareLogic = new SoftwareLogic(mockSoftwareRepo.Object);

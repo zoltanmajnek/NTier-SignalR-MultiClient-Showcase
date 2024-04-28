@@ -1,4 +1,5 @@
 ﻿using CABTEX_HFT_2023241.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CABTEX_HFT_2023241.Logic
@@ -12,5 +13,6 @@ namespace CABTEX_HFT_2023241.Logic
         void Update(MyDisk item);
         int? FreeSpaceOnTheDisk(int id);
         public IQueryable<MyDisk> ContainsaGivenSoftware(string swName);
+        public IEnumerable<Software> DiskDir(int diskId);
     }
 }

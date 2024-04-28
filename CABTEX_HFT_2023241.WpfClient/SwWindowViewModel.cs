@@ -4,6 +4,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -92,7 +93,7 @@ namespace CABTEX_HFT_2023241.WpfClient
                         ErrorMessage = ex.Message;
                     }
 
-                    
+                    Thread.Sleep(300);
                     try
                     {
                         var sendMsgToDiskWindow = MyDisks.First();
@@ -107,6 +108,16 @@ namespace CABTEX_HFT_2023241.WpfClient
                 DeleteSoftwareCommand = new RelayCommand(() =>
                 {
                     Softwares.Delete(SelectedSoftware.Id);
+                    Thread.Sleep(300);
+                    try
+                    {
+                        var sendMsgToDiskWindow = MyDisks.First();
+                        MyDisks.Update(sendMsgToDiskWindow);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        ErrorMessage = ex.Message;
+                    }
                 },
                 () =>
                 {

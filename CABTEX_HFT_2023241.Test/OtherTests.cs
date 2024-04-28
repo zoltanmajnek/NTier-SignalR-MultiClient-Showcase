@@ -38,7 +38,7 @@ namespace CABTEX_HFT_2023241.Test
             softwareLogic = new SoftwareLogic(softwareRepo);
             friendLogic = new FriendLogic(friendRepo, softwareRepo, diskRepo);
             diskDirectoryLogic = new DiskDirectoryLogic(directoryRepo);
-            myDiskLogic = new MyDiskLogic(diskRepo, softwareRepo);
+            myDiskLogic = new MyDiskLogic(diskRepo, softwareRepo, directoryRepo);
             diskTypeLogic = new DiskTypeLogic(diskTypeRepo);
         }
 

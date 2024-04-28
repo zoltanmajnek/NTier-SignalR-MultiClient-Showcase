@@ -61,7 +61,7 @@ namespace CABTEX_HFT_2023241.Logic
             var allInGen = ReadAll().Where(s => s.Genre.ToUpper() == genre.ToUpper()).Select(s => s.Size);
             if (!allInGen.Any())
             {
-                if (genre=="*") allInGen = ReadAll().Select(s => s.Size);
+                if (genre == "*") allInGen = ReadAll().Select(s => s.Size);
                 else throw new ArgumentException("No such genre");
             }
             return allInGen.Average();

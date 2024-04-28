@@ -14,6 +14,7 @@ namespace CABTEX_HFT_2023241.WpfClient
     public class MyDisksViewModel : ObservableRecipient
     {
         private string errorMessage;
+        private RestService restService;
 
         public string ErrorMessage
         {
@@ -23,15 +24,9 @@ namespace CABTEX_HFT_2023241.WpfClient
 
         public RestCollection<MyDisk> MyDisks { get; set; }
         public RestCollection<Software> Softwares { get; set; }
-        public RestCollection<DiskDirectory> DiskDirectories { get; set; }
-
-        //public RestCollection<Friend> Friends { get; set; }
-        //public RestCollection<DiskType> Types { get; set; }
-
 
         private MyDisk selectedMyDisk;
         private ObservableCollection<Software> containedSoftwares;
-
         public ObservableCollection<Software> ContainedSoftwares
         {
             get { return containedSoftwares; }
@@ -41,17 +36,19 @@ namespace CABTEX_HFT_2023241.WpfClient
         {
             get
             {
-                var dir = DiskDirectories.Where(d => d.DiskId == selectedMyDisk.Id).ToList();
-                containedSoftwares.Clear();
+                if (selectedMyDisk != null)
+                {                    
+                    var strres = restService.Get<Software>("ALotOfNonCrudLogic/DiskDir/" + selectedMyDisk.Id);
+                    containedSoftwares.Clear();
 
-                foreach (var item in dir)
-                {
-                    var sw = Softwares.FirstOrDefault(x => x.Id == item.SoftwareId);
-                    if (sw != null) containedSoftwares.Add(sw);
+                    foreach (var item in strres)
+                    {
+                        if (item != null) containedSoftwares.Add(item);
+                    }
                 }
-
                 return selectedMyDisk;
             }
+
             set
             {
                 if (value != null)
@@ -88,7 +85,7 @@ namespace CABTEX_HFT_2023241.WpfClient
             {
                 MyDisks = new RestCollection<MyDisk>("http://localhost:53910/", "MyDisk", "hub");
                 Softwares = new RestCollection<Software>("http://localhost:53910/", "Software", "hub");
-                DiskDirectories = new RestCollection<DiskDirectory>("http://localhost:53910/", "DiskDirectory", "hub");
+                restService = new RestService("http://localhost:53910/", "DiskDirectory");
                 CreateMyDiskCommand = new RelayCommand(() =>
                 {
                     MyDisks.Add(new MyDisk()

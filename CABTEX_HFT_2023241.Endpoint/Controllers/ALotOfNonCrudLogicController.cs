@@ -69,5 +69,10 @@ namespace CABTEX_HFT_2023241.Endpoint.Controllers
             return friendLogic.WhoHasThisSoftware(swName);
         }
 
+        [HttpGet("{id}")]
+        public IEnumerable<Software> DiskDir(int id)
+        {
+            return diskLogic.DiskDir(id);
+        }
     }
 }
