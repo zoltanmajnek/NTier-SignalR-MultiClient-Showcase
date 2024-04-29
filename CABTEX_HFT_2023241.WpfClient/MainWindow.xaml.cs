@@ -32,7 +32,8 @@ namespace CABTEX_HFT_2023241.WpfClient
 
         private void DirectoriesInfo(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("DiskDirectory: Ez csak egy kapcsolótábla, próbálja a többi funkciót!");
+            var Window = new DirWindow();
+            Window.Show();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
