@@ -60,7 +60,7 @@ Follow these instructions to get a copy of the project up and running on your lo
    While the Endpoint is running, you can start any of the client applications to interact with the database:
    * **For Console:** Run the `.Client` project.
    * **For Desktop:** Run the `.WpfClient` project.
-   * **For Web:** Serve the `.JSClient` folder using a local web server (like VS Code Live Server) or open the main HTML file directly in your browser (depending on CORS configuration).
+   * **For Web:** Set the JSClient project as the startup project in Visual Studio and run it. The built-in ASP.NET Core web server will host the static frontend files from the wwwroot folder and open the application in your default browser.
 
 ## 🧪 Testing
 
